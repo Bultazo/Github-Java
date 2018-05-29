@@ -7,7 +7,7 @@ import model.Example;
 import model.IModel;
 import view.IView;
 
-/**
+/** BBBBBBBBBBBBBBBBBBBBBBBBB
  * <h1>The Class ControllerFacade provides a facade of the Controller component.</h1>
  *
  * @author Jean-Aymeric DIET jadiet@cesi.fr
