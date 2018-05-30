@@ -56,17 +56,7 @@ class ViewPanel extends JPanel implements Observer {
 					viewFrame.getModel().getMap().getSpell().getY() * 32, null);
 		}
 
-		// Draw the Hero
-		if (viewFrame.getModel().getMap().getHero() != null) {
-			graphics.drawImage((viewFrame.getModel().getMap().getHero().getSprite().getImage()),
-					viewFrame.getModel().getMap().getHero().getX() * 32,
-					viewFrame.getModel().getMap().getHero().getY() * 32, null);
-		}
-
-		for (IMobileElement mobileElement : viewFrame.getModel().getMap().getMobiles()) {
-			graphics.drawImage(mobileElement.getSprite().getImage(), mobileElement.getX() * 32 + 1,
-					mobileElement.getY() * 32 + 1, null);
-		}
+	
 
 		Font font = new Font("TimesRoman", Font.BOLD, 30);
 		graphics.setFont(font);
