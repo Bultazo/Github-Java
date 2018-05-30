@@ -2,10 +2,6 @@ package contract;
 
 import java.util.ArrayList;
 
-/**
- * Interface of the map.
- * @author Romain
- */
 public interface IMap {
 
      void addElementToMap(IElement element, int x, int y);
@@ -25,7 +21,6 @@ public interface IMap {
      IElement[][] getElements();
 
      ArrayList<IMobileElement> getMobiles();
-
 
      void setHeroPosition(int x, int y);
 

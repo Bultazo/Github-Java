@@ -3,7 +3,7 @@ package contract;
 /**
  * The Interface IView.
  *
- * @author Romain
+ * @author DELL
  */
 public interface IView {
 

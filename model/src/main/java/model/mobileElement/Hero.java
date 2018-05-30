@@ -13,20 +13,21 @@ public class Hero extends MobileElement implements IAnimatedSprite {
     private AnimatedSprite sprites;
 
     public Hero() throws IOException {
-        super((new Sprite(ImageIO.read(new File("C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/lorann_r.png")))), Permeability.BLOCKING, StateElement.WEAK);
-
-        String imagesPaths[] = {
-                "lorann_b",
-                "lorann_bl",
-                "lorann_l",
-                "lorann_ul",
-                "lorann_u",
-                "lorann_ur",
-                "lorann_r",
-                "lorann_br",
+       
+    	super(new Sprite(ImageIO.read(new File("sprite/lorann_r.png"))), Permeability.BLOCKING, StateElement.NOP);
+       
+    	String Animation[] = {
+            "lorann_b",
+            "lorann_bl",
+            "lorann_l",
+            "lorann_ul",
+            "lorann_u",
+            "lorann_ur",
+            "lorann_r",
+            "lorann_br",
         };
 
-        sprites = new AnimatedSprite((ImageIO.read(new File("C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/lorann_b.png"))),imagesPaths);
+        sprites = new AnimatedSprite((ImageIO.read(new File("sprite/lorann_b.png"))),Animation);
     }
 
 

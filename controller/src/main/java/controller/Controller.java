@@ -15,27 +15,13 @@ public class Controller implements IController {
 	private IMobileElement monsterToKill;
 
 	public Controller(final IView view, final IModel model) {
-		this.setView(view);
-		this.setModel(model);
+		this.view = view;
+		this.model = model;
+		this.view.setController(this);
 		clock = new Clock(this);
 		clock.start();
 	}
 
-	private void setView(final IView view) {
-		this.view = view;
-	}
-
-	private void setModel(final IModel model) {
-		this.model = model;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String moncef () {
-		return null;
-	}
 	public synchronized void moveHero(int x, int y) {
 		model.getMap().getHero().setX(model.getMap().getHero().getX() + x);
 		model.getMap().getHero().setY(model.getMap().getHero().getY() + y);
@@ -145,43 +131,41 @@ public class Controller implements IController {
 	}
 
 	public void orderPerform(ControllerOrder controllerOrder) throws IOException {
-		if (model.getMap().getHero() != null) {
+		IMobileElement lorann = model.getMap().getHero();
+		if (lorann != null) {
 			switch (controllerOrder) {
 			case UP:
-				if (contactHero(model.getMap().getHero().getX(), model.getMap().getHero().getY() - 1)) {
-					model.getMap().getHero().setDirection(ControllerOrder.UP);
+				if (contactHero(lorann.getX(), lorann.getY() - 1)) {
+					lorann.setDirection(ControllerOrder.UP);
 					moveHero(0, -1);
-
 				}
 				break;
 			case DOWN:
 
-				if (contactHero(model.getMap().getHero().getX(), model.getMap().getHero().getY() + 1)) {
-					model.getMap().getHero().setDirection(ControllerOrder.DOWN);
+				if (contactHero(lorann.getX(), lorann.getY() + 1)) {
+					lorann.setDirection(ControllerOrder.DOWN);
 					moveHero(0, +1);
 
 				}
 				break;
 			case LEFT:
-				if (contactHero(model.getMap().getHero().getX() - 1, model.getMap().getHero().getY())) {
-					model.getMap().getHero().setDirection(ControllerOrder.LEFT);
+				if (contactHero(lorann.getX() - 1, lorann.getY())) {
+					lorann.setDirection(ControllerOrder.LEFT);
 					moveHero(-1, 0);
 
 				}
 				break;
 			case RIGHT:
-				if (contactHero(model.getMap().getHero().getX() + 1, model.getMap().getHero().getY())) {
-					model.getMap().getHero().setDirection(ControllerOrder.RIGHT);
+				if (contactHero(lorann.getX() + 1, lorann.getY())) {
+					lorann.setDirection(ControllerOrder.RIGHT);
 					moveHero(+1, 0);
 
 				}
 				break;
 
 			case SPACE:
-				if (model.getMap().getHero().getStateElement() != StateElement.WEAK
-						&& canCastSpell(model.getMap().getHero().getDirection())) // Test if it is able to cast a spell
-				{
-					castSpell(model.getMap().getHero().getDirection());
+				if (canCastSpell(lorann.getDirection())) {
+					castSpell(lorann.getDirection());
 				}
 				break;
 
@@ -209,7 +193,6 @@ public class Controller implements IController {
 		this.clock.setStopped(true);
 		model.getMap().setHero(null);
 		model.flush();
-
 	}
 
 	public void castSpell(ControllerOrder direction) throws IOException {
@@ -234,11 +217,9 @@ public class Controller implements IController {
 	}
 
 	public void updateSprite() {
-
 		if (this.model.getMap().getHero() instanceof IAnimatedSprite) {
 			((IAnimatedSprite) this.model.getMap().getHero()).next();
 		}
-
 	}
 
 	public synchronized void moveSpell() {
@@ -309,13 +290,10 @@ public class Controller implements IController {
 				}
 			}
 		}
-
 	}
 
 	public synchronized void destroySpell() {
-		model.getMap().getHero().setStateElement(StateElement.STRONG);
 		model.getMap().setSpell(null);
-		model.flush();
 	}
 
 	public synchronized void destroyMonster(IMobileElement monster) {

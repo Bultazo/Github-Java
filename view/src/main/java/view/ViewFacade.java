@@ -1,29 +1,54 @@
 package view;
 
-import javax.swing.JOptionPane;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.IOException;
 
-/**
- * <h1>The Class ViewFacade provides a facade of the View component.</h1>
- *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
- * @version 1.0
- */
-public class ViewFacade implements IView {
+import javax.swing.SwingUtilities;
+import contract.IController;
+import contract.IModel;
+import contract.IView;
 
-    /**
-     * Instantiates a new view facade.
-     */
-    public ViewFacade() {
-        super();
-    }
+public class ViewFacade implements IView, Runnable, KeyListener {
 
-    /*
-     * (non-Javadoc)
-     * @see view.IView#displayMessage(java.lang.String)
-     */
-    @Override
-    public final void displayMessage(final String message) {
-        JOptionPane.showMessageDialog(null, message);
-    }
+	private final Frame viewFrame;
+	private IController controller;
+
+	public ViewFacade(final IModel model) {
+		this.viewFrame = new Frame(model);
+		SwingUtilities.invokeLater(this);
+	}
+
+	public void run() {
+		this.viewFrame.addKeyListener(this);
+		this.viewFrame.setVisible(true);
+	}
+
+	public void keyPressed(final KeyEvent e) {
+		try {
+			this.controller.orderPerform(Frame.keyCodeToControllerOrder(e));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void keyTyped(final KeyEvent e) {
+		// NOP
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setController(final IController controller) {
+		this.controller = controller;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+	 */
 
 }

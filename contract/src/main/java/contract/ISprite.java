@@ -2,12 +2,15 @@ package contract;
 
 import java.awt.*;
 
-/**
- * Interface of the sprite.
- * @author Romain
- */
 public interface ISprite{
 
+	/**
+     * Sets the image.
+     *
+     * @param image
+     *      The image.
+     */
+    void setImage(Image image);
     /**
      * Gets the Image.
      *
@@ -16,12 +19,6 @@ public interface ISprite{
      */
     Image getImage();
 
-    /**
-     * Sets the image.
-     *
-     * @param image
-     *      The image.
-     */
-    void setImage(Image image);
+    
 
 }

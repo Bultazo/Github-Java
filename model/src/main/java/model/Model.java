@@ -11,14 +11,13 @@ import model.mobileElement.*;
 import model.motionLessElement.*;
 import model.ModelFacade;
 import model.Element.*;
+import model.dao.ExampleDAO;
 
 import javax.imageio.ImageIO;
 
 public class Model extends Observable implements IModel {
 
 	private Map map;
-
-	private ModelFacade modelface;
 
 	private String message;
 
@@ -34,86 +33,86 @@ public class Model extends Observable implements IModel {
 
 		map = new Map(20, 12);
 		map.setID(ID);
-		modelface = new ModelFacade();
+
 		ResultSet resultSet = null;
+
 		try {
-			resultSet = modelface.getElementById(ID);
+			resultSet = this.getElementById(ID);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		int monsterPlus = 1;
-		if (resultSet == null) {
-			System.out.println("ajpppppppppppppppppppppppppppppppppppppppppppppp");
-		}
+
+		int monsterCount = 1;
+
 		try {
 			while (resultSet.next()) {
 
-				String name = resultSet.getString("type");
-				if (name.equals("BoneH")) {
-					MotionlessElement e = new BoneH();
-					map.addElementToMap(e, resultSet.getInt("X"), resultSet.getInt("Y"));
-				} else if (name.equals("BoneC")) {
-					MotionlessElement e = new BoneC();
-					map.addElementToMap(e, resultSet.getInt("X"), resultSet.getInt("Y"));
-				} else if (name.equals("BoneV")) {
-					MotionlessElement e = new BoneV();
-					map.addElementToMap(e, resultSet.getInt("X"), resultSet.getInt("Y"));
-				} else if (name.equals("Bourse")) {
-					MotionlessElement e = new Purse();
-					map.addElementToMap(e, resultSet.getInt("X"), resultSet.getInt("Y"));
-				} else if (name.equals("Clef")) {
-					MotionlessElement e = new Key();
-					map.addElementToMap(e, resultSet.getInt("X"), resultSet.getInt("Y"));
-				} else if (name.equals("Player")) {
-					Hero e = new Hero();
-					map.setHero(e);
-					map.setHeroPosition(resultSet.getInt("X"), resultSet.getInt("Y"));
-					map.getHero().setStateElement(StateElement.WEAK);
-				}
+				String type = resultSet.getString("type");
+				MotionlessElement e = null;
 
-				else if (name.equals("MonstreF")) {
-					switch (monsterPlus) {
+				switch (type) {
+				case ("BoneH"):
+					e = new BoneH();
+					break;
+				case ("BoneC"):
+					e = new BoneC();
+					break;
+				case ("BoneV"):
+					e = new BoneV();
+					break;
+				case ("Bourse"):
+					e = new Purse();
+					break;
+				case ("Clef"):
+					e = new Key();
+					break;
+				case ("Porte"):
+					e = new Door();
+					break;
+				case ("Player"):
+					Hero h = new Hero();
+					map.setHero(h);
+					map.setHeroPosition(resultSet.getInt("X"), resultSet.getInt("Y"));
+					break;
+
+				case ("MonstreF"):
+					switch (monsterCount) {
 					case (1): {
-						MobileElement e = new Monster("monster_1");
-						map.getMobiles().add(e);
-						e.setX(resultSet.getInt(("X")));
-						e.setY(resultSet.getInt("Y"));
-						monsterPlus++;
+						MobileElement m = new Monster("monster_1");
+						map.getMobiles().add(m);
+						m.setX(resultSet.getInt(("X")));
+						m.setY(resultSet.getInt("Y"));
+						monsterCount++;
 						break;
 					}
 					case (2): {
-						MobileElement e = new Monster(name + "_2");
-						map.getMobiles().add(e);
-						e.setX(resultSet.getInt(("X")));
-						e.setY(resultSet.getInt("Y"));
-						monsterPlus++;
+						MobileElement m = new Monster("monster_2");
+						map.getMobiles().add(m);
+						m.setX(resultSet.getInt(("X")));
+						m.setY(resultSet.getInt("Y"));
+						monsterCount++;
 						break;
 					}
 					case (3): {
-						MobileElement e = new Monster(name + "_3");
-						map.getMobiles().add(e);
-						e.setX(resultSet.getInt(("X")));
-						e.setY(resultSet.getInt("Y"));
-						monsterPlus++;
+						MobileElement m = new Monster("monster_3");
+						map.getMobiles().add(m);
+						m.setX(resultSet.getInt(("X")));
+						m.setY(resultSet.getInt("Y"));
+						monsterCount++;
 						break;
 					}
 					case (4): {
-						MobileElement e = new Monster(name + "_4");
-						e.setX(resultSet.getInt(("X")));
-						e.setY(resultSet.getInt("Y"));
-						map.getMobiles().add(e);
-						monsterPlus++;
+						MobileElement m = new Monster("monster_4");
+						map.getMobiles().add(m);
+						m.setX(resultSet.getInt(("X")));
+						m.setY(resultSet.getInt("Y"));
+						monsterCount++;
 						break;
 					}
-
 					}
-
-				} else if (name.equals("Porte")) {
-					Door e = new Door();
-					map.addElementToMap(e, resultSet.getInt("X"), resultSet.getInt("Y"));
 				}
-
+				map.addElementToMap(e, resultSet.getInt("X"), resultSet.getInt("Y"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -124,16 +123,10 @@ public class Model extends Observable implements IModel {
 		this.setMessage("");
 	}
 
-	public Observable getObservable() {
-		return this;
-	}
-
 	public synchronized void flush() {
 		if (map.getScore() >= 100 && map.getHero() != null)
-			map.getHero().setStateElement(StateElement.STRONG);
-
-		setChanged();
-		notifyObservers();
+			setChanged();
+			notifyObservers();
 	}
 
 	public int testType(IElement element) {
@@ -152,43 +145,34 @@ public class Model extends Observable implements IModel {
 		return 0;
 	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-		flush();
-	}
-
 	public void createSpell(String path, ControllerOrder direction) throws IOException {
-		MobileElement spell = new Spell(path, direction);
-
+		IMobileElement spell = new Spell(path, direction);
+		IMobileElement lorann = map.getHero();
 		map.setSpell(spell);
-		switch (map.getHero().getDirection()) {
+
+		switch (lorann.getDirection()) {
 		case UP:
-			map.getSpell().setY(map.getHero().getY() - 1);
-			map.getSpell().setX(map.getHero().getX());
+			map.getSpell().setY(lorann.getY() - 1);
+			map.getSpell().setX(lorann.getX());
 			break;
 
 		case DOWN:
-			map.getSpell().setY(map.getHero().getY() + 1);
-			map.getSpell().setX(map.getHero().getX());
+			map.getSpell().setY(lorann.getY() + 1);
+			map.getSpell().setX(lorann.getX());
 			break;
 
 		case RIGHT:
-			map.getSpell().setY(map.getHero().getY());
-			map.getSpell().setX(map.getHero().getX() + 1);
+			map.getSpell().setY(lorann.getY());
+			map.getSpell().setX(lorann.getX() + 1);
 			break;
 
 		case LEFT:
-			map.getSpell().setY(map.getHero().getY());
-			map.getSpell().setX(map.getHero().getX() - 1);
+			map.getSpell().setY(lorann.getY());
+			map.getSpell().setX(lorann.getX() - 1);
 			break;
 		default:
 			break;
 		}
-
 		map.getSpell().setDirection(direction);
 	}
 
@@ -198,12 +182,34 @@ public class Model extends Observable implements IModel {
 					"C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/gate_open.png"))));
 			element.setPermeability(Permeability.PENETRABLE);
 			element.setStateElement(StateElement.DOOR);
-			flush();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public ResultSet getElementById(final int id) throws SQLException {
+		return ExampleDAO.getElementById(id);
+	}
+
+	public ResultSet getElementByName(String name) throws SQLException {
+		// TODO Auto-generated method stub
+		return ExampleDAO.getElementByName(name);
+
+	}
+
+	public ResultSet getAllElements() throws SQLException {
+		// TODO Auto-generated method stub
+		return ExampleDAO.getAllElements();
+
+	}
 
 }

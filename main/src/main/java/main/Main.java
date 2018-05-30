@@ -10,26 +10,20 @@ import view.*;
 /**
  * <h1>The Class Main.</h1>
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author DELL
  * @version 1.0
  */
 public abstract class Main {
 
-    /**
-     * The main method.
-     *
-     * @param args
-     *            the arguments
-     */
     public static void main(final String[] args) throws SQLException {
-		Model model = new Model();
-		model.loadMap(1);
 		
-		View view = new View(model);
+    	Model model = new Model(); //On instancie un modèle
+		model.loadMap(3); //On charge la map correspondante
+		
+		ViewFacade view = new ViewFacade(model); //On lie la vue et le modèle
 		
 		Controller controller = new Controller(view, model);
-		
-		view.setController(controller);
+
     }
 
 }

@@ -1,13 +1,14 @@
 package contract;
 /**
- * The Enum ControllerOrder.
- * @author Romain
+ * 
+ * @author DELL
+ *
  */
 public enum Permeability {
 
-    /** It can not pass through this*/
+    // Impossible de passer à travèrs
     BLOCKING,
 
-    /** It can pass through this*/
+    // Possible de passer à travèrs
     PENETRABLE
 }

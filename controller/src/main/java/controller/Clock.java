@@ -1,5 +1,4 @@
 package controller;
-
 import contract.IClock;
 
 public class Clock extends Thread implements IClock {

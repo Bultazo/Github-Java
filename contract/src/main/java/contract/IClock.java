@@ -1,9 +1,5 @@
 package contract;
 
-/**
- * Interface of the Clock.
- * @author Romain
- */
 public interface IClock {
 
     /**

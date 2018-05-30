@@ -26,26 +26,4 @@ public final class ModelFacade  {
      * @see model.IModel#getExampleById(int)
      */
 
-    public ResultSet getElementById(final int id) throws SQLException {
-        return ExampleDAO.getElementById(id);
-    }
-
-    
-
-	public ResultSet getElementByName(String name) throws SQLException {
-		// TODO Auto-generated method stub
-		return ExampleDAO.getElementByName(name);
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see model.IModel#getAllElements()
-	 */
-
-	public ResultSet getAllElements() throws SQLException {
-		// TODO Auto-generated method stub
-		return ExampleDAO.getAllElements();
-		
-	}
-
 }

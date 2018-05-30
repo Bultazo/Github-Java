@@ -35,7 +35,7 @@ public class MobileElement extends Element implements IMobileElement{
     public void setX(int x) {this.x = x;}
 
   
-    public void setSprite(ISprite sprite) {
+    public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
 
@@ -69,15 +69,6 @@ public class MobileElement extends Element implements IMobileElement{
         this.stateElement = stateElement;
     }
 
-
-	/* (non-Javadoc)
-	 * @see contract.IMobileElement#getSprite()
-	 */
-	@Override
-	public ISprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 }

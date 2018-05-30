@@ -1,9 +1,6 @@
 package contract;
 
-/**
- * Interface of MobileElement.
- * @author Romain
- */
+
 public interface IMobileElement {
 
     /**

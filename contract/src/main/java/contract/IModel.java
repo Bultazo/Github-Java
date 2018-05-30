@@ -1,7 +1,6 @@
 package contract;
 
 import java.io.IOException;
-import java.util.Observable;
 
 public interface IModel {
 
@@ -19,27 +18,11 @@ public interface IModel {
 	 */
 	void loadMap(int ID);
 
-	/**
-	 * Gets the observable.
-	 *
-	 * @return the observable
-	 */
-	Observable getObservable();
 
 	/**
 	 * notify the changes to the view
 	 */
 	void flush();
-
-
-	/**
-	 * test the type of element
-	 *
-	 * @param element
-	 * 				the element
-	 * @return int representing an element
-	 */
-	int testType(IElement element);
 
 
 	/**
@@ -77,5 +60,11 @@ public interface IModel {
 	 *
 	 */
 	void setDoor(IElement element);
+
+	/**
+	 * @param element
+	 * @return
+	 */
+	int testType(IElement element);
 
 }

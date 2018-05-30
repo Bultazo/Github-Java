@@ -1,33 +1,25 @@
 package contract;
 
-/**
- *Sees if an item is collectable or not.
- *@author Romain
- */
 public enum StateElement {
 
-    /** It can be picked up. */
+    /** C'est un element "comestible" */
     COLLECTABLE,
 
-    /** It can not be picked up. */
+    /** C'est un element fixe du décor */
     FIXED,
 
-    /** It is a door. */
+    /** C'est une porte */
     DOOR,
 
-    /** It is a dragon.*/
+    /** C'est un dragon */
     DRAGON,
 
-    /** It is a spell. */
+    /** C'est un sortilège. */
     SPELL,
 
-    /** It is dead. */
+    /** C'est mort */
     DEATH,
-
-    /** It can use a spell. */
-    WEAK,
-
-    /** It can not use a spell. */
-    STRONG
-
+    
+    /** C'est le Héros */
+    NOP,
 }

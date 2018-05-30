@@ -13,7 +13,8 @@ import java.io.IOException;
 public class Key extends MotionlessElement{
    
     public Key() throws IOException {
-        super((new Sprite(ImageIO.read(new File("C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/crystal_ball.png")))), Permeability.PENETRABLE,StateElement.COLLECTABLE);
+        super((new Sprite(ImageIO.read(new File("sprite/crystal_ball.png")))), 
+        		Permeability.PENETRABLE,StateElement.COLLECTABLE);
     }
 
 

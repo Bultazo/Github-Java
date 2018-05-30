@@ -1,9 +1,9 @@
 package contract;
 
 /**
- * The Enum ControllerOrder.
+ * 
+ * @author DELL
  *
- * @author Romain
  */
 public enum ControllerOrder {
 

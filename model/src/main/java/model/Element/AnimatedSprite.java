@@ -20,6 +20,7 @@ public class AnimatedSprite extends Sprite implements IAnimatedSprite {
     public AnimatedSprite(Image image, String[] images) {
         super(image);
         this.images = new Image[images.length];
+        
         for(int i = 0; i<images.length; i++){
             try {
                this.images[i] = ImageIO.read(new File("C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/"+images[i]+".png"));

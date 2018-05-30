@@ -1,11 +1,10 @@
 package contract;
 
 import java.io.IOException;
-
 /**
- * The Interface IController.
+ * 
+ * @author DELL
  *
- * @author Tanguy Blochet
  */
 public interface IController {
 
@@ -22,6 +21,7 @@ public interface IController {
 	/**
 	 * move the monsters
 	 */
+	
 	void AIMonster();
 
 	/**
