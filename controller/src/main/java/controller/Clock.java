@@ -7,7 +7,7 @@ public class Clock extends Thread implements IClock {
 
 	private boolean stopped = false;
 
-	private int time = 75;
+	private int time = 100;
 
 	public Clock(Controller controller) {
 		this.controller = controller;
@@ -20,18 +20,6 @@ public class Clock extends Thread implements IClock {
 
 			try {
 				Thread.sleep(time);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			controller.updateSprite();
-			try {
-				Thread.sleep(time);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			controller.updateSprite();
-			try {
-				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

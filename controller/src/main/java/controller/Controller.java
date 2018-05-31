@@ -175,7 +175,6 @@ public class Controller implements IController {
 			if (clock.isStopped()) {
 				clock = new Clock(this);
 				clock.start();
-
 			}
 
 			model.flush();
@@ -212,7 +211,9 @@ public class Controller implements IController {
 	}
 
 	public void updateSprite() {
-		((IAnimatedSprite) this.model.getMap().getHero()).next();
+		if (this.model.getMap().getHero() != null) {
+			((IAnimatedSprite) this.model.getMap().getHero()).next();
+		}
 	}
 
 	public synchronized void moveSpell() {

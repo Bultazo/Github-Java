@@ -28,55 +28,67 @@ class Panel extends JPanel implements Observer {
 	protected void paintComponent(final Graphics graphics) {
 		graphics.setColor(Color.black);
 		graphics.fillRect(0, 0, this.viewFrame.getWidth(), this.viewFrame.getHeight());
-		int y;
-		int x = 0;
-		for (IElement[] element : viewFrame.getModel().getMap().getElements()) {
-			y = 0;
-			for (IElement e : element) {
-				if (e != null) {
-					graphics.drawImage(e.getSprite().getImage(), x * ZOOM + 1, y * ZOOM + 1, null);
-				}
-				y++;
-			}
-			x++;
-		}
-		
-		// Draw the Hero
-		IMobileElement lorann = viewFrame.getModel().getMap().getHero();
-		if (lorann != null) {
-			graphics.drawImage((lorann.getSprite().getImage()),
-					lorann.getX() * ZOOM,
-					lorann.getY() * ZOOM, null);
-		}
 
-		for (IMobileElement element : viewFrame.getModel().getMap().getMobiles()) {
-			if (element != null) {
-				graphics.drawImage(element.getSprite().getImage(), element.getX()*ZOOM, element.getY()*ZOOM, null);
-				System.out.println(element.toString());
-			}
+		this.fillMap(graphics);
+		this.drawLorann(graphics);
+		this.drawMonsters(graphics);
+		this.drawGUI(graphics);
+
+		// Draw the message (GAME OVER OR YOU WIN)
+		if (viewFrame.getModel().getMessage() != null) {
+			graphics.drawString(viewFrame.getModel().getMessage(),
+					(viewFrame.getWidth() / 2) - (viewFrame.getModel().getMessage().length() * 10),
+					(viewFrame.getHeight()) - viewFrame.getModel().getMessage().length() * 5);
 		}
-		
 		// Draw the spell if exist
 		if (viewFrame.getModel().getMap().getSpell() != null) {
 			graphics.drawImage((viewFrame.getModel().getMap().getSpell().getSprite().getImage()),
 					viewFrame.getModel().getMap().getSpell().getX() * ZOOM,
 					viewFrame.getModel().getMap().getSpell().getY() * ZOOM, null);
 		}
+	}
 
-		graphics.setFont(new Font("Calibri", Font.PLAIN, 30));
+	void fillMap(Graphics g) {
+		int y, x = 0;
+		for (IElement[] element : viewFrame.getModel().getMap().getElements()) {
+			y = 0;
+			for (IElement e : element) {
+				if (e != null) {
+					g.drawImage(e.getSprite().getImage(), x * ZOOM + 1, y * ZOOM + 1, null);
+				}
+				y++;
+			}
+			x++;
+		}
+	}
 
-		// Draw the message (GAME OVER OR YOU WIN)
-		if (viewFrame.getModel().getMessage() != null)
-			graphics.drawString(viewFrame.getModel().getMessage(),
-					(viewFrame.getWidth() / 2) - (viewFrame.getModel().getMessage().length() * 10),
-					(viewFrame.getHeight()) - viewFrame.getModel().getMessage().length() * 5);
-
-		graphics.setColor(Color.CYAN);
-		graphics.drawString("Resurrections : " + viewFrame.getModel().getMap().getScore(),
-				(viewFrame.getWidth() / 10) - 50, viewFrame.getHeight() - 40);
-
-		graphics.setColor(Color.YELLOW);
-		graphics.drawString("Score : " + viewFrame.getModel().getMap().getScore(), (viewFrame.getWidth() / 10 * 9) - 60,
+	void drawGUI(Graphics g) {
+		g.setFont(new Font("Calibri", Font.PLAIN, 30));
+		
+		//Afficher le nombre de vies restantes
+		g.setColor(Color.CYAN); 
+		g.drawString("Resurrections : " + viewFrame.getModel().getMap().getScore(), 50,
 				viewFrame.getHeight() - 40);
+		
+		//Afficher le score
+		g.setColor(Color.WHITE);
+		g.drawString("Score : " + viewFrame.getModel().getMap().getScore(), (viewFrame.getWidth() / 20 * 14),
+				viewFrame.getHeight() - 40);
+	}
+	
+	void drawLorann(Graphics g) {
+		IMobileElement lorann = viewFrame.getModel().getMap().getHero();
+		if (lorann != null) {
+			g.drawImage((lorann.getSprite().getImage()), lorann.getX() * ZOOM, lorann.getY() * ZOOM, null);
+		}
+	}
+	
+	void drawMonsters(Graphics g) {
+		for (IMobileElement element : viewFrame.getModel().getMap().getMobiles()) {
+			if (element != null) {
+				g.drawImage(element.getSprite().getImage(), element.getX() * ZOOM, element.getY() * ZOOM, null);
+			}
+		}
+
 	}
 }

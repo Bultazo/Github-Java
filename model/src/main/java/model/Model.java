@@ -76,7 +76,7 @@ public class Model extends Observable implements IModel {
 					map.setHeroPosition(resultSet.getInt("X"), resultSet.getInt("Y"));
 					break;
 
-				case ("MonstreF"):
+				case ("Monstre"):
 					switch (monsterCount) {
 					case (1): {
 						MobileElement m = new Monster("monster_1");
