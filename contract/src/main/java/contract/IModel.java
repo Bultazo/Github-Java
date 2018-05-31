@@ -1,6 +1,7 @@
 package contract;
 
 import java.io.IOException;
+import java.util.Observer;
 
 public interface IModel {
 
@@ -66,5 +67,7 @@ public interface IModel {
 	 * @return
 	 */
 	int testType(IElement element);
+	
+	public void addObserver(Observer o);
 
 }

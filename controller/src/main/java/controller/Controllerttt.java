@@ -15,11 +15,31 @@ public class Controller implements IController {
 	private IMobileElement monsterToKill;
 
 	public Controller(final IView view, final IModel model) {
-		this.view = view;
-		this.model = model;
-		this.view.setController(this);
+		this.setView(view);
+		this.setModel(model);
 		clock = new Clock(this);
 		clock.start();
+	}
+
+	private void setView(final IView view) {
+		this.view = view;
+	}
+
+	private void setModel(final IModel model) {
+		this.model = model;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String moncef () {
+		return null;
+	}
+	public synchronized void moveHero(int x, int y) {
+		model.getMap().getHero().setX(model.getMap().getHero().getX() + x);
+		model.getMap().getHero().setY(model.getMap().getHero().getY() + y);
+		model.flush();
 	}
 
 	public synchronized boolean contactMonster(int x, int y) {
@@ -57,7 +77,6 @@ public class Controller implements IController {
 	public synchronized boolean contactHero(int x, int y) {
 		if (model.getMap().getElement(x, y) == null)
 			return true;
-
 		if ((model.getMap().getElement(x, y).getPermeability()) == Permeability.PENETRABLE) {
 			if (model.getMap().getElement(x, y).getStateElement() == StateElement.COLLECTABLE) {
 				if (model.testType(model.getMap().getElement(x, y)) == 2) // Purse
@@ -126,41 +145,43 @@ public class Controller implements IController {
 	}
 
 	public void orderPerform(ControllerOrder controllerOrder) throws IOException {
-		IMobileElement lorann = model.getMap().getHero();
-		if (lorann != null) {
+		if (model.getMap().getHero() != null) {
 			switch (controllerOrder) {
 			case UP:
-				if (contactHero(lorann.getX(), lorann.getY() - 1)) {
-					lorann.setDirection(ControllerOrder.UP);
-					lorann.moveUp();
+				if (contactHero(model.getMap().getHero().getX(), model.getMap().getHero().getY() - 1)) {
+					model.getMap().getHero().setDirection(ControllerOrder.UP);
+					moveHero(0, -1);
+
 				}
 				break;
 			case DOWN:
 
-				if (contactHero(lorann.getX(), lorann.getY() + 1)) {
-					lorann.setDirection(ControllerOrder.DOWN);
-					lorann.moveDown();
+				if (contactHero(model.getMap().getHero().getX(), model.getMap().getHero().getY() + 1)) {
+					model.getMap().getHero().setDirection(ControllerOrder.DOWN);
+					moveHero(0, +1);
 
 				}
 				break;
 			case LEFT:
-				if (contactHero(lorann.getX() - 1, lorann.getY())) {
-					lorann.setDirection(ControllerOrder.LEFT);
-					lorann.moveLeft();
+				if (contactHero(model.getMap().getHero().getX() - 1, model.getMap().getHero().getY())) {
+					model.getMap().getHero().setDirection(ControllerOrder.LEFT);
+					moveHero(-1, 0);
 
 				}
 				break;
 			case RIGHT:
-				if (contactHero(lorann.getX() + 1, lorann.getY())) {
-					lorann.setDirection(ControllerOrder.RIGHT);
-					lorann.moveRight();
+				if (contactHero(model.getMap().getHero().getX() + 1, model.getMap().getHero().getY())) {
+					model.getMap().getHero().setDirection(ControllerOrder.RIGHT);
+					moveHero(+1, 0);
 
 				}
 				break;
 
 			case SPACE:
-				if (canCastSpell(lorann.getDirection())) {
-					castSpell(lorann.getDirection());
+				if (model.getMap().getHero().getStateElement() != StateElement.WEAK
+						&& canCastSpell(model.getMap().getHero().getDirection())) // Test if it is able to cast a spell
+				{
+					castSpell(model.getMap().getHero().getDirection());
 				}
 				break;
 
@@ -188,6 +209,7 @@ public class Controller implements IController {
 		this.clock.setStopped(true);
 		model.getMap().setHero(null);
 		model.flush();
+
 	}
 
 	public void castSpell(ControllerOrder direction) throws IOException {
@@ -212,7 +234,11 @@ public class Controller implements IController {
 	}
 
 	public void updateSprite() {
-		((IAnimatedSprite) this.model.getMap().getHero()).next();
+
+		if (this.model.getMap().getHero() instanceof IAnimatedSprite) {
+			((IAnimatedSprite) this.model.getMap().getHero()).next();
+		}
+
 	}
 
 	public synchronized void moveSpell() {
@@ -283,10 +309,13 @@ public class Controller implements IController {
 				}
 			}
 		}
+
 	}
 
 	public synchronized void destroySpell() {
+		model.getMap().getHero().setStateElement(StateElement.STRONG);
 		model.getMap().setSpell(null);
+		model.flush();
 	}
 
 	public synchronized void destroyMonster(IMobileElement monster) {
@@ -325,5 +354,4 @@ public class Controller implements IController {
 		}
 		return false;
 	}
-
 }

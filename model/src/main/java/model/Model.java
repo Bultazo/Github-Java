@@ -71,7 +71,7 @@ public class Model extends Observable implements IModel {
 					e = new Door();
 					break;
 				case ("Player"):
-					Hero h = new Hero();
+					Hero h = new Hero(this);
 					map.setHero(h);
 					map.setHeroPosition(resultSet.getInt("X"), resultSet.getInt("Y"));
 					break;
@@ -124,7 +124,6 @@ public class Model extends Observable implements IModel {
 	}
 
 	public synchronized void flush() {
-		if (map.getScore() >= 100 && map.getHero() != null)
 			setChanged();
 			notifyObservers();
 	}
@@ -209,7 +208,6 @@ public class Model extends Observable implements IModel {
 	public ResultSet getAllElements() throws SQLException {
 		// TODO Auto-generated method stub
 		return ExampleDAO.getAllElements();
-
 	}
 
 }

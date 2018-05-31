@@ -1,7 +1,7 @@
 package contract;
 import java.awt.*;
 
-public interface IHero {
+public interface IHero extends IMobileElement {
     
     /**
      * Sets the Image.
@@ -16,4 +16,6 @@ public interface IHero {
      *      Image.
      */
     Image getImage();
+    
+
 }

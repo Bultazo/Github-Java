@@ -70,4 +70,12 @@ public interface IMobileElement {
      */
     void setStateElement(StateElement stateElement);
 
+    /**
+     * Move Left 
+     * 		
+     */
+    public void moveLeft();
+    public void moveRight();
+    public void moveUp();
+    public void moveDown();
 }

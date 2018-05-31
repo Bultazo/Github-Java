@@ -9,19 +9,6 @@ import java.io.IOException;
 public interface IController {
 
 
-	/**
-	 * Move the hero
-	 * @param x
-	 * 			easting
-	 * @param y
-	 * 			northing
-     */
-	void moveHero(int x, int y);
-
-	/**
-	 * move the monsters
-	 */
-	
 	void AIMonster();
 
 	/**

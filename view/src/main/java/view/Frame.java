@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.Observer;
+
 import javax.swing.*;
 
 import contract.ControllerOrder;
@@ -32,7 +34,7 @@ public class Frame extends JFrame{
 		this.setSize(660, 425 + 50); 
 		this.setLocationRelativeTo(null);
 		Panel viewPanel = new Panel(this);
-		
+		this.model.addObserver(viewPanel);
 		this.setContentPane(viewPanel);
 		this.setBackground(Color.black);
 		this.setVisible(true);

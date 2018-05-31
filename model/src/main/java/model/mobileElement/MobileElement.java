@@ -70,5 +70,43 @@ public class MobileElement extends Element implements IMobileElement{
     }
 
 
+	/* (non-Javadoc)
+	 * @see contract.IMobileElement#moveLeft()
+	 */
+	@Override
+	public void moveLeft() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	/* (non-Javadoc)
+	 * @see contract.IMobileElement#moveRight()
+	 */
+	@Override
+	public void moveRight() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	/* (non-Javadoc)
+	 * @see contract.IMobileElement#moveUp()
+	 */
+	@Override
+	public void moveUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	/* (non-Javadoc)
+	 * @see contract.IMobileElement#moveDown()
+	 */
+	@Override
+	public void moveDown() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
