@@ -8,10 +8,6 @@ public interface IMap {
 
      void setElement(int x, int y,IElement element);
 
-     void setScore(int score);
-
-     int getScore();
-
      int getID();
 
      void setID(int ID);

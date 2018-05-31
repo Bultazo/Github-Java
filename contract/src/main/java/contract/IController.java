@@ -1,6 +1,7 @@
 package contract;
 
 import java.io.IOException;
+
 /**
  * 
  * @author DELL
@@ -19,7 +20,7 @@ public interface IController {
 	 * 			northing
      * @return boolean
      */
-	boolean contactMonster(int x, int y);
+	boolean contactMonster(int x, int y, IMobileElement monster);
 
 	/**
 	 * Test contact between the hero and the elements
@@ -40,4 +41,9 @@ public interface IController {
 	 * 				Can"t read the file.
 	 */
 	void orderPerform(ControllerOrder controllerOrder) throws IOException;
+	
+	void updateController() ;
+
+	void updateSprite();
+
 }

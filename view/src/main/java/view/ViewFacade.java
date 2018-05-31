@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+
 import javax.swing.SwingUtilities;
 import contract.IController;
 import contract.IModel;
@@ -14,6 +15,7 @@ public class ViewFacade implements IView, Runnable, KeyListener {
 	private final Frame viewFrame;
 	private IController controller;
 
+	
 	public ViewFacade(final IModel model) {
 		this.viewFrame = new Frame(model);
 		SwingUtilities.invokeLater(this);
@@ -32,7 +34,7 @@ public class ViewFacade implements IView, Runnable, KeyListener {
 		}
 	}
 	public void keyTyped(final KeyEvent e) {
-		// NOP
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -44,11 +46,5 @@ public class ViewFacade implements IView, Runnable, KeyListener {
 	public void setController(final IController controller) {
 		this.controller = controller;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-	 */
 
 }

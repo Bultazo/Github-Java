@@ -24,21 +24,26 @@ public class Hero extends MobileElement implements IAnimatedSprite {
 
 	public void moveLeft() {
 		model.getMap().getHero().setX(model.getMap().getHero().getX() - 1);
+		this.setImage(sprites.getImages()[2]);
 		model.flush();
 	}
 	
 	public void moveRight() {
 		model.getMap().getHero().setX(model.getMap().getHero().getX() + 1);
+		this.setImage(sprites.getImages()[6]);
 		model.flush();
+		
 	}
 	
 	public void moveUp() {
 		model.getMap().getHero().setY(model.getMap().getHero().getY() - 1);
+		this.setImage(sprites.getImages()[4]);
 		model.flush();
 	}
 	
 	public void moveDown() {
 		model.getMap().getHero().setY(model.getMap().getHero().getY() + 1);
+		this.setImage(sprites.getImages()[0]);
 		model.flush();
 	}
 	public void next() {

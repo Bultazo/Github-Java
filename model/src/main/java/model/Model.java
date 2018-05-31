@@ -9,7 +9,6 @@ import java.util.Observable;
 import contract.*;
 import model.mobileElement.*;
 import model.motionLessElement.*;
-import model.ModelFacade;
 import model.Element.*;
 import model.dao.ExampleDAO;
 
@@ -18,22 +17,21 @@ import javax.imageio.ImageIO;
 public class Model extends Observable implements IModel {
 
 	private Map map;
-
+	
+	private int score;	
+	
 	private String message;
 
+	private int resurrections;
+	
 	public Model() {
 		this.map = null;
 	}
-
-	public Map getMap() {
-		return this.map;
-	}
-
+    
 	public void loadMap(final int ID) {
-
 		map = new Map(20, 12);
 		map.setID(ID);
-
+		
 		ResultSet resultSet = null;
 
 		try {
@@ -151,23 +149,23 @@ public class Model extends Observable implements IModel {
 
 		switch (lorann.getDirection()) {
 		case UP:
-			map.getSpell().setY(lorann.getY() - 1);
+			map.getSpell().setY(lorann.getY() + 1);
 			map.getSpell().setX(lorann.getX());
 			break;
 
 		case DOWN:
-			map.getSpell().setY(lorann.getY() + 1);
+			map.getSpell().setY(lorann.getY() - 1);
 			map.getSpell().setX(lorann.getX());
 			break;
 
 		case RIGHT:
 			map.getSpell().setY(lorann.getY());
-			map.getSpell().setX(lorann.getX() + 1);
+			map.getSpell().setX(lorann.getX() - 1);
 			break;
 
 		case LEFT:
 			map.getSpell().setY(lorann.getY());
-			map.getSpell().setX(lorann.getX() - 1);
+			map.getSpell().setX(lorann.getX() + 1);
 			break;
 		default:
 			break;
@@ -186,7 +184,11 @@ public class Model extends Observable implements IModel {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public Map getMap() {
+		return this.map;
+	}
+	
 	public String getMessage() {
 		return message;
 	}
@@ -199,15 +201,20 @@ public class Model extends Observable implements IModel {
 		return ExampleDAO.getElementById(id);
 	}
 
-	public ResultSet getElementByName(String name) throws SQLException {
-		// TODO Auto-generated method stub
-		return ExampleDAO.getElementByName(name);
-
+	public int getResurrections() {
+		return resurrections;
 	}
 
-	public ResultSet getAllElements() throws SQLException {
-		// TODO Auto-generated method stub
-		return ExampleDAO.getAllElements();
+	public void setResurrections(int resurrections) {
+		this.resurrections = resurrections;
 	}
+	
+    public void setScore(int score) {
+        this.score=score;
+    }
+  
+    public int getScore() {
+        return this.score;
+    }
 
 }

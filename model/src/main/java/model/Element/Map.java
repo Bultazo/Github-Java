@@ -17,8 +17,6 @@ public class Map implements IMap{
     
     private ArrayList<IMobileElement> mobiles;
 
-    private int score=0;
-
     private int ID;
 
     private IMobileElement hero;
@@ -62,17 +60,6 @@ public class Map implements IMap{
     }
 
 
-    
-    public void setScore(int score) {
-        this.score=score;
-    }
-
-    
-    public int getScore() {
-        return this.score;
-    }
-
-    
     public int getID() {
         return ID;
     }

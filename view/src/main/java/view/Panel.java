@@ -34,13 +34,7 @@ class Panel extends JPanel implements Observer {
 		this.drawMonsters(graphics);
 		this.drawGUI(graphics);
 		this.drawSpell(graphics);
-		
-		// Draw the message (GAME OVER OR YOU WIN)
-		if (viewFrame.getModel().getMessage() != null) {
-			graphics.drawString(viewFrame.getModel().getMessage(),
-					(viewFrame.getWidth() / 2) - (viewFrame.getModel().getMessage().length() * 10),
-					(viewFrame.getHeight()) - viewFrame.getModel().getMessage().length() * 5);
-		}
+		this.drawMessage(graphics);
 	}
 
 	void fillMap(Graphics g) {
@@ -59,25 +53,24 @@ class Panel extends JPanel implements Observer {
 
 	void drawGUI(Graphics g) {
 		g.setFont(new Font("Calibri", Font.PLAIN, 30));
-		
-		//Afficher le nombre de vies restantes
-		g.setColor(Color.CYAN); 
-		g.drawString("Resurrections : " + viewFrame.getModel().getMap().getScore(), 50,
-				viewFrame.getHeight() - 40);
-		
-		//Afficher le score
+
+		// Afficher le nombre de vies restantes
+		g.setColor(Color.CYAN);
+		g.drawString("Resurrections : " + viewFrame.getModel().getResurrections(), 50, viewFrame.getHeight() - 40);
+
+		// Afficher le score
 		g.setColor(Color.WHITE);
-		g.drawString("Score : " + viewFrame.getModel().getMap().getScore(), (viewFrame.getWidth() / 20 * 14),
+		g.drawString("Score : " + viewFrame.getModel().getScore(), (viewFrame.getWidth() - 200),
 				viewFrame.getHeight() - 40);
 	}
-	
+
 	void drawLorann(Graphics g) {
 		IMobileElement lorann = viewFrame.getModel().getMap().getHero();
 		if (lorann != null) {
 			g.drawImage((lorann.getSprite().getImage()), lorann.getX() * ZOOM, lorann.getY() * ZOOM, null);
 		}
 	}
-	
+
 	void drawMonsters(Graphics g) {
 		for (IMobileElement element : viewFrame.getModel().getMap().getMobiles()) {
 			if (element != null) {
@@ -85,7 +78,7 @@ class Panel extends JPanel implements Observer {
 			}
 		}
 	}
-	
+
 	void drawSpell(Graphics g) {
 		IMobileElement spell = viewFrame.getModel().getMap().getSpell();
 		IMobileElement lorann = viewFrame.getModel().getMap().getHero();
@@ -93,6 +86,15 @@ class Panel extends JPanel implements Observer {
 			g.drawImage((viewFrame.getModel().getMap().getSpell().getSprite().getImage()),
 					viewFrame.getModel().getMap().getSpell().getX() * ZOOM,
 					viewFrame.getModel().getMap().getSpell().getY() * ZOOM, null);
+		}
+	}
+
+	void drawMessage(Graphics g) {
+		// Draw the message (GAME OVER OR YOU WIN)
+		if (viewFrame.getModel().getMessage() != null) {
+			g.drawString(viewFrame.getModel().getMessage(),
+					(viewFrame.getWidth() / 2) - (viewFrame.getModel().getMessage().length() * 6),
+					(viewFrame.getHeight()) - viewFrame.getModel().getMessage().length() * 3);
 		}
 	}
 }

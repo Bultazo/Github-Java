@@ -35,7 +35,7 @@ public class MobileElement extends Element implements IMobileElement{
     public void setX(int x) {this.x = x;}
 
   
-    public void setSprite(Sprite sprite) {
+    public synchronized void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
 

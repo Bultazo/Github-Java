@@ -70,4 +70,21 @@ public interface IModel {
 	
 	public void addObserver(Observer o);
 
+	/**
+	 * @param i
+	 */
+	void setResurrections(int resurrections);
+
+	/**
+	 * 
+	 */
+	int getResurrections();
+
+	/**
+	 * @param i
+	 */
+	void setScore(int i);
+	
+	int getScore();
+
 }
