@@ -3,6 +3,7 @@ package controller;
 import contract.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Controller implements IController {
 
@@ -12,11 +13,12 @@ public class Controller implements IController {
 
 	private Clock clock;
 
-	private IMobileElement monsterToKill;
-
+	private ArrayList<IMobileElement> DeadMonsters;
+	
 	public Controller(final IView view, final IModel model) {
 		this.view = view;
 		this.model = model;
+		this.model.loadMap(4); //On charge la map correspondante
 		this.view.setController(this);
 		clock = new Clock(this);
 		clock.start();
@@ -26,7 +28,8 @@ public class Controller implements IController {
 
 		if (model.getMap().getElement(x, y) == null && model.getMap().getHero() != null) {
 			int notInContact = 0;
-
+			DeadMonsters = new ArrayList<IMobileElement>();
+			
 			for (IMobileElement monster : model.getMap().getMobiles()) {
 
 				if (monster.getX() != x && monster.getY() != y)
@@ -39,11 +42,15 @@ public class Controller implements IController {
 				if (isSpell()) {
 					if (monster.getX() == model.getMap().getSpell().getX()
 							&& monster.getY() == model.getMap().getSpell().getY()) {
-						monsterToKill = monster;
+						DeadMonsters.add(monster);
 						destroySpell();
 						model.getMap().setScore(model.getMap().getScore() + 500);
 					}
 				}
+				
+			}
+			for (IMobileElement monster : DeadMonsters) {
+				destroyMonster(monster);
 			}
 
 			if (notInContact >= model.getMap().getMobiles().size() - 1) {
@@ -168,15 +175,12 @@ public class Controller implements IController {
 		}
 		switch (controllerOrder) {
 		case RETRY:
-
 			model.loadMap(model.getMap().getID());
 			model.setMessage("");
-
 			if (clock.isStopped()) {
 				clock = new Clock(this);
 				clock.start();
 			}
-
 			model.flush();
 			break;
 		}
@@ -190,11 +194,10 @@ public class Controller implements IController {
 	}
 
 	public void castSpell(ControllerOrder direction) throws IOException {
-		if (!isSpell())
+		if (!isSpell()) {
 			model.createSpell("fireball", direction);
-		model.flush();
-
-	}
+			model.flush();
+	}}
 
 	public boolean isSpell() {
 		if (model.getMap().getSpell() != null)
@@ -206,7 +209,6 @@ public class Controller implements IController {
 	public synchronized void updateController() {
 		AIMonster();
 		moveSpell();
-		destroyMonster(monsterToKill);
 		model.flush();
 	}
 

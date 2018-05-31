@@ -33,18 +33,13 @@ class Panel extends JPanel implements Observer {
 		this.drawLorann(graphics);
 		this.drawMonsters(graphics);
 		this.drawGUI(graphics);
-
+		this.drawSpell(graphics);
+		
 		// Draw the message (GAME OVER OR YOU WIN)
 		if (viewFrame.getModel().getMessage() != null) {
 			graphics.drawString(viewFrame.getModel().getMessage(),
 					(viewFrame.getWidth() / 2) - (viewFrame.getModel().getMessage().length() * 10),
 					(viewFrame.getHeight()) - viewFrame.getModel().getMessage().length() * 5);
-		}
-		// Draw the spell if exist
-		if (viewFrame.getModel().getMap().getSpell() != null) {
-			graphics.drawImage((viewFrame.getModel().getMap().getSpell().getSprite().getImage()),
-					viewFrame.getModel().getMap().getSpell().getX() * ZOOM,
-					viewFrame.getModel().getMap().getSpell().getY() * ZOOM, null);
 		}
 	}
 
@@ -89,6 +84,15 @@ class Panel extends JPanel implements Observer {
 				g.drawImage(element.getSprite().getImage(), element.getX() * ZOOM, element.getY() * ZOOM, null);
 			}
 		}
-
+	}
+	
+	void drawSpell(Graphics g) {
+		IMobileElement spell = viewFrame.getModel().getMap().getSpell();
+		IMobileElement lorann = viewFrame.getModel().getMap().getHero();
+		if (spell != null && (spell.getX() != lorann.getX() || spell.getY() != lorann.getY())) {
+			g.drawImage((viewFrame.getModel().getMap().getSpell().getSprite().getImage()),
+					viewFrame.getModel().getMap().getSpell().getX() * ZOOM,
+					viewFrame.getModel().getMap().getSpell().getY() * ZOOM, null);
+		}
 	}
 }
