@@ -20,7 +20,9 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 
 
 	/**
-	 * The main constructor 
+	 * The main constructor
+	 * @throws IOException
+     * 		Can't read file 
 	 */
 	public Spell(String path, IModel model) throws IOException {
 		super((new Sprite(ImageIO.read(new File("sprite/fireball_1.png")))), Permeability.PENETRABLE,

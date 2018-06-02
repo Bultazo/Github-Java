@@ -17,6 +17,8 @@ public class BoneH extends MotionlessElement{
 	
      /**
      * The main constructor 
+     * @throws IOException
+     * 		Can't read file
      */
     public BoneH() throws IOException {
         super((new Sprite(ImageIO.read(new File("sprite/horizontal_bone.png")))), 

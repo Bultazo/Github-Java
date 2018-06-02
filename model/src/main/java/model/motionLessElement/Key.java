@@ -18,6 +18,8 @@ public class Key extends MotionlessElement{
    
     /**
      * The main constructor 
+     * @throws IOException
+     * 		Can't read file
      */
     public Key() throws IOException {
         super((new Sprite(ImageIO.read(new File("sprite/crystal_ball.png")))), 

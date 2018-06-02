@@ -34,25 +34,25 @@ public interface IController {
 
 	/**
 	 * Gets the order from the view
-	 * @return void
+	 * 
 	 */
 	void orderPerform(ControllerOrder controllerOrder) throws IOException;
 	
 	/**
 	 * Update the game (Ai & spell)
-	 * @return void
+	 * 
 	 */
 	void updateController() ;
 
 	/**
 	 * Update lorann sprite 
-	 * @return void
+	 * 
 	 */
 	void updateSprite();
 	
 	/**
 	 * Start the game from the first map
-	 * @return void
+	 * 
 	 */
 	void start();
 

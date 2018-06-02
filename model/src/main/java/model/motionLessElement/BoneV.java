@@ -17,6 +17,8 @@ import java.io.IOException;
 public class BoneV extends MotionlessElement{
     /**
      * The main constructor 
+     * @throws IOException
+     * 		Can't read file
      */
     public BoneV() throws IOException {
         super((new Sprite(ImageIO.read(new File("sprite/vertical_bone.png")))), 

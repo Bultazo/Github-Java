@@ -18,6 +18,8 @@ public class Monster extends MobileElement  {
     
 	/**
 	 * The main constructor 
+	 * @throws IOException
+     * 		Can't read file
 	 */
 	public Monster(String path, IModel model) throws IOException {
         super((new Sprite(ImageIO.read(new File("sprite/"+path+".png")))), Permeability.BLOCKING, StateElement.MONSTER);

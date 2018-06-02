@@ -72,7 +72,7 @@ public class Controller implements IController {
 
 	/**
 	 * Initialize all the needed variables to fresh
-	 * @return void
+	 * 
 	 */
 	public void init() {
 		this.model.loadMap(1); // On charge la première map
@@ -85,7 +85,7 @@ public class Controller implements IController {
 
 	/**
 	 * Ends the game (1 Life lost) 
-	 * @return void
+	 * 
 	 */
 	public void gameOver() {
 		this.model.setResurrections(this.model.getResurrections() - 1);
@@ -310,7 +310,7 @@ public class Controller implements IController {
 
 	/**
 	 * Verifies if no spell is already created then cast the spell
-	 * @return void
+	 * 
 	 */
 	public void castSpell() throws IOException {
 		if (!isSpell()) {
@@ -332,7 +332,7 @@ public class Controller implements IController {
 
 	/**
 	 * Moves the spell according to its direction
-	 * @return void
+	 * 
 	 */
 	public synchronized void moveSpell() {
 
@@ -406,7 +406,7 @@ public class Controller implements IController {
 
 	/**
 	 * Destroys the spell
-	 * @return void
+	 * 
 	 */
 	public synchronized void destroySpell() {
 		model.getMap().setSpell(null);
@@ -414,7 +414,7 @@ public class Controller implements IController {
 
 	/**
 	 * Destroys the monster
-	 * @return void
+	 * 
 	 */
 	public synchronized void destroyMonster(IMobileElement monster) {
 		model.getMap().getMobiles().remove(monster);

@@ -26,7 +26,7 @@ public class ControllerFacade {
 
 	/**
 	 * The controller's start method
-	 * @return void
+	 * 
 	 */
 	public void start() {
 		this.controller.start();
@@ -34,7 +34,7 @@ public class ControllerFacade {
 
 	/**
 	 * The controller's updateController method
-	 * @return void
+	 * 
 	 */
 	public synchronized void updateController() {
 		this.controller.updateController();
@@ -42,7 +42,7 @@ public class ControllerFacade {
 
 	/**
 	 * The controller's updateSprite method
-	 * @return void
+	 * 
 	 */
 	public void updateSprite() {
 		this.controller.updateSprite();

@@ -20,6 +20,8 @@ public class Purse extends MotionlessElement {
 
 	/**
 	 * The main constructor 
+	 * @throws IOException
+     * 		Can't read file
 	 */
 	public Purse() throws IOException {
 		super((new Sprite(ImageIO.read(new File("sprite/purse.png")))), Permeability.PENETRABLE,

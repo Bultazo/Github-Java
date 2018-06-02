@@ -20,6 +20,8 @@ public class Hero extends MobileElement implements IAnimatedSprite {
 
 	/**
 	 * The main constructor 
+	 * @throws IOException
+     * 		Can't read file
 	 */
 	public Hero(IModel model) throws IOException {
 
