@@ -4,32 +4,88 @@ import java.util.ArrayList;
 
 public interface IMap {
 
-     void addElementToMap(IElement element, int x, int y);
+     /**
+     * Adds un element to the map
+     * @return void
+     */
+    void addElementToMap(IElement element, int x, int y);
 
-     void setElement(int x, int y,IElement element);
+     /**
+     * Sets the Element
+     * @return void
+     */
+    void setElement(int x, int y,IElement element);
 
-     int getID();
+     /**
+     * Gets the ID of the level
+     * @return int
+     */
+    int getID();
 
-     void setID(int ID);
+     /**
+     * Sets the ID of the level
+     * @return void
+     */
+    void setID(int ID);
 
-     IElement getElement(int x, int y);
+     /**
+     * Gets the element
+     * @return IElement
+     */
+    IElement getElement(int x, int y);
 
-     IElement[][] getElements();
+     /**
+     * Gets the list of all the elements : The map.
+     * @return IElement[][]
+     */
+    IElement[][] getElements();
 
-     ArrayList<IMobileElement> getMobiles();
+     /**
+     * Gets the monsters 
+     * @return ArrayList<IMobileElement>
+     */
+    ArrayList<IMobileElement> getMobiles();
 
-     void setHeroPosition(int x, int y);
+     /**
+     * Sets the initial position of the hero 
+     * @return void
+     */
+    void setHeroPosition(int x, int y);
 
-     IMobileElement getHero();
+     /**
+     * Gets the Hero
+     * @return IMobileElement
+     */
+    IMobileElement getHero();
 
-     void setHero(IMobileElement hero);
+     /**
+     * Sets the Hero in the level
+     * @return void
+     */
+    void setHero(IMobileElement hero);
 
-     IMobileElement getSpell();
+     /**
+     * Gets the Spell
+     * @return IMobileElement
+     */
+    IMobileElement getSpell();
 
-     void setSpell(IMobileElement spell);
+     /**
+     * Sets the Spell
+     * @return void
+     */
+    void setSpell(IMobileElement spell);
      
-     IElement getDoor();
+     /**
+     * Gets the door
+     * @return IElement
+     */
+    IElement getDoor();
      
-     void setDoor(IElement Door);
+     /**
+     * Sets the door
+     * @return void
+     */
+    void setDoor(IElement Door);
 
     }

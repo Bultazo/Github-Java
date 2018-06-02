@@ -12,21 +12,27 @@ import contract.IMap;
 import contract.IModel;
 import model.dao.ExampleDAO;
 
+
 /**
- * <h1>The Class ModelFacade provides a facade of the Model component.</h1>
+ * @author DELL
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
- * @version 1.0
  */
 public final class ModelFacade implements IModel{
 
+	/**
+	 * The model
+	 */
 	private Model model;
  
+    /**
+     * The main constructor 
+     */
     public ModelFacade() {
         this.model = new Model();
     }
     
-
+    // All the model methods
+    
     public IMap getMap() {
     	return this.model.getMap();
     }

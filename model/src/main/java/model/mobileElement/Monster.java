@@ -10,8 +10,15 @@ import java.io.File;
 import java.io.IOException;
 
  
+/**
+ * @author DELL
+ *
+ */
 public class Monster extends MobileElement  {
     
+	/**
+	 * The main constructor 
+	 */
 	public Monster(String path, IModel model) throws IOException {
         super((new Sprite(ImageIO.read(new File("sprite/"+path+".png")))), Permeability.BLOCKING, StateElement.MONSTER);
         this.model = model;
@@ -20,6 +27,9 @@ public class Monster extends MobileElement  {
 	
 	// Movement 
 	
+	/*
+	 * Overrides the moveLeft Method in the implemented interface
+	 */ 
 	public void moveLeft() {
 
 		if (model.getMap().getElement(this.getX() - 1, this.getY()) == null) {
@@ -31,6 +41,9 @@ public class Monster extends MobileElement  {
 		model.flush();
 	}
 
+	/*
+	 * Overrides the moveRight Method in the implemented interface
+	 */ 
 	public void moveRight() {
 
 		if (model.getMap().getElement(this.getX() + 1, this.getY()) == null) {
@@ -44,6 +57,9 @@ public class Monster extends MobileElement  {
 
 	}
 
+	/*
+	 * Overrides the moveUp Method in the implemented interface
+	 */ 
 	public void moveUp() {
 		if (model.getMap().getElement(this.getX(), this.getY() - 1) == null) {
 			this.setDirection(ControllerOrder.UP);
@@ -55,6 +71,9 @@ public class Monster extends MobileElement  {
 		model.flush();
 	}
 
+	/*
+	 * Overrides the moveDown Method in the implemented interface
+	 */ 
 	public void moveDown() {
 			if (model.getMap().getElement(this.getX(), this.getY() + 1) == null) {
 				this.setDirection(ControllerOrder.DOWN);

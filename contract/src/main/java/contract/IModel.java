@@ -60,31 +60,47 @@ public interface IModel {
 	 * 		The element.
 	 *
 	 */
+	
+	/**
+	 * The closed door becomes open
+	 * @return void
+	 */
 	void setOpenDoor(IElement element);
 
 	/**
-	 * @param element
-	 * @return
+	 * Test the element type
+	 * @return int
 	 */
 	int testType(IElement element);
 	
+	/**
+	 * Adds an observer
+	 * @return void
+	 */
 	public void addObserver(Observer o);
 
 	/**
-	 * @param i
+	 * Sets the number of lives
+	 * @return void
 	 */
 	void setResurrections(int resurrections);
-
+	
 	/**
-	 * 
+	 * Gets the number of lives
+	 * @return int
 	 */
 	int getResurrections();
 
 	/**
-	 * @param i
+	 * Sets the score
+	 * @return void
 	 */
 	void setScore(int i);
 	
+	/**
+	 * Gets the score
+	 * @return int
+	 */
 	int getScore();
 
 }

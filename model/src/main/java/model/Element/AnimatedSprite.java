@@ -9,14 +9,30 @@ import java.io.File;
 import java.io.IOException;
 
 
+/**
+ * @author DELL
+ *
+ */
 public class AnimatedSprite extends Sprite implements IAnimatedSprite {
 
+    /**
+     * The images
+     */
     private Image[] images;
    
+    /**
+     * The stepNumber
+     */
     private int stepNumber;
 
+    /**
+     * The step
+     */
     private int step;
 
+    /**
+     * The main constructor 
+     */
     public AnimatedSprite(Image image, String[] images) {
         super(image);
         this.images = new Image[images.length];
@@ -32,6 +48,9 @@ public class AnimatedSprite extends Sprite implements IAnimatedSprite {
     
     // Animation 
     
+    /*
+     * Overrides the next Method in the implemented interface
+     */ 
     public void next()
     {
         this.step++;
@@ -43,15 +62,26 @@ public class AnimatedSprite extends Sprite implements IAnimatedSprite {
 
     // Getters and setters 
     
+    /**
+     * Gets the image
+     * @return Image[]
+     */
     public Image[] getImages() {
 		return images;
 	}
 
 
+	/**
+	 * Set the image array (Animation)
+	 * @return void
+	 */
 	public void setImages(Image[] images) {
         this.images = images;
     }
 
+    /*
+     * Overrides the getImage Method in the implemented interface
+     */ 
     public Image getImage() {
         return this.images[this.step];
     }

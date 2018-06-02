@@ -4,28 +4,28 @@ package contract;
 public interface IMobileElement {
 
     /**
-     * Gets the northing.
+     * Gets the Y.
      * @return
      *      int
      */
     int getY();
 
     /**
-     * Sets the northing.
+     * Sets the Y.
      * @param y
      *       Northing.
      */
     void setY(int y);
 
     /**
-     * Gets the easting.
+     * Gets the X.
      * @return
      *      int
      */
     int getX();
 
     /**
-     *Sets the easting.
+     *Sets the X.
      * @param x
      *      Easting.
      */
@@ -70,12 +70,28 @@ public interface IMobileElement {
      */
     void setStateElement(StateElement stateElement);
 
+
     /**
-     * Move Left 
-     * 		
+     * Moves Left
+     * @return void
      */
     public void moveLeft();
+    
+    /**
+     * Moves Right
+     * @return void
+     */
     public void moveRight();
+    
+    /**
+     * Moves Up
+     * @return void
+     */
     public void moveUp();
+    
+    /**
+     * Moves Down
+     * @return void
+     */
     public void moveDown();
 }

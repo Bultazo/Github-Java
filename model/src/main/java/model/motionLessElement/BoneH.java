@@ -9,9 +9,16 @@ import java.io.File;
 import java.io.IOException;
 
 
+/**
+ * @author DELL
+ *
+ */
 public class BoneH extends MotionlessElement{
 	
-     public BoneH() throws IOException {
+     /**
+     * The main constructor 
+     */
+    public BoneH() throws IOException {
         super((new Sprite(ImageIO.read(new File("sprite/horizontal_bone.png")))), 
         		Permeability.BLOCKING,StateElement.FIXED);
 

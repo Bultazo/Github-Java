@@ -1,5 +1,9 @@
 package contract;
-
+/**
+ * 
+ * @author DELL
+ *
+ */
 public interface IElement {
 
     /**

@@ -6,9 +6,9 @@ package contract;
  */
 public enum Permeability {
 
-    // Impossible de passer à travèrs
+    // Blocks everything
     BLOCKING,
 
-    // Possible de passer à travèrs
+    // Can be penetrated
     PENETRABLE
 }

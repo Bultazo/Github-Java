@@ -4,16 +4,36 @@ import java.io.IOException;
 
 import contract.IClock;
 
+/**
+ * @author DELL
+ *
+ */
+
 public class Clock extends Thread implements IClock {
 
+	/**
+	 * The controller
+	 */
 	private Controller controller;
+	/**
+	 * The stopped
+	 */
 	private boolean stopped = false;
+	/**
+	 * The time
+	 */
 	private int time = 100;
 
+	/**
+	 * The main constructor 
+	 */
 	public Clock(Controller controller) {
 		this.controller = controller;
 	}
 
+	/*
+	 * Overrides the run Method in 
+	 */ 
 	public synchronized void run() {
 		while (!stopped) {
 			controller.updateController();
@@ -26,11 +46,16 @@ public class Clock extends Thread implements IClock {
 		}
 
 	}
-
+	/*
+	 * Overrides the isStopped Method 
+	 */ 
 	public boolean isStopped() {
 		return stopped;
 	}
 
+	/*
+	 * Overrides the setStopped Method 
+	 */ 
 	public void setStopped(boolean stopped) {
 		this.stopped = stopped;
 	}

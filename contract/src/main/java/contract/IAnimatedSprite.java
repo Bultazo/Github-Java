@@ -1,11 +1,15 @@
 package contract;
 
+/**
+ * @author DELL
+ *
+ */
 public interface IAnimatedSprite extends ISprite {
 
-    /**
-     * The method that increments the step for the hero's sprite
-     *
-     */
-    void next();
+	/**
+	 * Animates the sprites
+	 * @return void
+	 */
+	void next();
 
 }

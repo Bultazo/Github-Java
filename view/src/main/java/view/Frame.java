@@ -12,20 +12,33 @@ import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 
+
 /**
  * @author DELL
  *
  */
-
 public class Frame extends JFrame {
 
+	/**
+	 * The serialVersionUID
+	 */
 	private static final long serialVersionUID = -697358409737458175L;
+	/**
+	 * The model
+	 */
 	private IModel model;
 
+	/**
+	 * The main constructor 
+	 */
 	public Frame(final IModel model) throws HeadlessException {
 		this.model = model;
 	}
 
+	/**
+	 * Builds a frame (Setting size, adding observers etc..)
+	 * @return void
+	 */
 	void buildViewFrame() {
 		this.setTitle("Lorann (BEST GAME EVER)");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,6 +52,10 @@ public class Frame extends JFrame {
 		this.setVisible(true);
 	}
 
+	/**
+	 * 
+	 * @return ControllerOrder
+	 */
 	static ControllerOrder keyCodeToControllerOrder(final KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
@@ -61,6 +78,10 @@ public class Frame extends JFrame {
 		return null;
 	}
 
+	/**
+	 * Gets the Model
+	 * @return IModel
+	 */
 	IModel getModel() {
 		return this.model;
 	}

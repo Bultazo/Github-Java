@@ -9,6 +9,7 @@ public interface IHero extends IMobileElement {
      *          The image to set.
      */
     public void setImage(Image image);
+    
 	/**
      * Gets the Image.
      *

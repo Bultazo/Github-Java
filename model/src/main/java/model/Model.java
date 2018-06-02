@@ -12,16 +12,35 @@ import model.Element.*;
 import model.dao.ExampleDAO;
 import javax.imageio.ImageIO;
 
+/**
+ * @author DELL
+ *
+ */
 public class Model extends Observable implements IModel {
 
+	/**
+	 * The map
+	 */
 	private Map map;
 
+	/**
+	 * The score
+	 */
 	private int score;
 
+	/**
+	 * The message
+	 */
 	private String message;
 
+	/**
+	 * The resurrections
+	 */
 	private int resurrections;
 
+	/**
+	 * The main constructor 
+	 */
 	public Model() {
 		this.map = null;
 	}
@@ -146,6 +165,9 @@ public class Model extends Observable implements IModel {
 	
 	// Methods
 	
+	/*
+	 * Overrides the testType Method in the implemented interface
+	 */ 
 	public int testType(IElement element) {
 		if (element instanceof Purse) {
 			return 2;
@@ -155,9 +177,10 @@ public class Model extends Observable implements IModel {
 		return 0;
 	}
 	
-	/**
-	 * Creates the Spell
-	 */
+
+	/*
+	 * Overrides the createSpell Method in the implemented interface
+	 */ 
 	public void createSpell(String path) throws IOException {
 		IMobileElement spell = new Spell(path, this);
 		IMobileElement lorann = map.getHero();
@@ -193,9 +216,9 @@ public class Model extends Observable implements IModel {
 		Sounds.SPELL.play();
 	}
 	
-	/**
-	 * The closed door in the map becomes open 
-	 */
+	/*
+	 * Overrides the setOpenDoor Method in the implemented interface
+	 */ 
 	public void setOpenDoor(IElement element) {
 		// TODO Auto-generated method stub
 		try {
@@ -212,30 +235,51 @@ public class Model extends Observable implements IModel {
 	
 	// Getters and setters 
 	
+	/*
+	 * Overrides the getMap Method in the implemented interface
+	 */ 
 	public Map getMap() {
 		return this.map;
 	}
 
+	/*
+	 * Overrides the getMessage Method in the implemented interface
+	 */ 
 	public String getMessage() {
 		return message;
 	}
 
+	/*
+	 * Overrides the setMessage Method in the implemented interface
+	 */ 
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
+	/*
+	 * Overrides the getResurrections Method in the implemented interface
+	 */ 
 	public int getResurrections() {
 		return resurrections;
 	}
 
+	/*
+	 * Overrides the setResurrections Method in the implemented interface
+	 */ 
 	public void setResurrections(int resurrections) {
 		this.resurrections = resurrections;
 	}
 
+	/*
+	 * Overrides the setScore Method in the implemented interface
+	 */ 
 	public void setScore(int score) {
 		this.score = score;
 	}
 
+	/*
+	 * Overrides the getScore Method in the implemented interface
+	 */ 
 	public int getScore() {
 		return this.score;
 	}

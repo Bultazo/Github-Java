@@ -1,15 +1,19 @@
 package contract;
-
+/**
+ * 
+ * @author DELL
+ *
+ */
 public interface IClock {
 
     /**
-     * gets the running state of the clock
+     * Gets the running state of the clock
      * @return boolean
      */
     boolean isStopped();
 
     /**
-     * sets the state of the clock
+     * Sets the state of the clock
      * @param stopped
      *      True or False.
      */

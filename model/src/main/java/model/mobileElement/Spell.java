@@ -7,11 +7,21 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author DELL
+ *
+ */
 public class Spell extends MobileElement implements IAnimatedSprite {
 
+	/**
+	 * The sprites
+	 */
 	private AnimatedSprite sprites;
 
 
+	/**
+	 * The main constructor 
+	 */
 	public Spell(String path, IModel model) throws IOException {
 		super((new Sprite(ImageIO.read(new File("sprite/fireball_1.png")))), Permeability.PENETRABLE,
 				StateElement.SPELL);
@@ -23,6 +33,9 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 
 	// Movement 
 	
+	/*
+	 * Overrides the moveLeft Method in the implemented interface
+	 */ 
 	public void moveLeft() {
 		if (model.getMap().getElement(this.getX() - 1, this.getY()) == null) {
 			this.setDirection(ControllerOrder.LEFT);
@@ -33,6 +46,9 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 		model.flush();
 	}
 
+	/*
+	 * Overrides the moveRight Method in the implemented interface
+	 */ 
 	public void moveRight() {
 		if (model.getMap().getElement(this.getX() + 1, this.getY()) == null) {
 			this.setDirection(ControllerOrder.RIGHT);
@@ -45,6 +61,9 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 
 	}
 
+	/*
+	 * Overrides the moveUp Method in the implemented interface
+	 */ 
 	public void moveUp() {
 		if (model.getMap().getElement(this.getX(), this.getY() - 1) == null) {
 			this.setDirection(ControllerOrder.UP);
@@ -56,6 +75,9 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 		model.flush();
 	}
 
+	/*
+	 * Overrides the moveDown Method in the implemented interface
+	 */ 
 	public void moveDown() {
 			if (model.getMap().getElement(this.getX(), this.getY() + 1) == null) {
 				this.setDirection(ControllerOrder.DOWN);
@@ -69,6 +91,9 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 
 	// Animation 
 	
+	/*
+	 * Overrides the next Method in the implemented interface
+	 */ 
 	public void next() {
 		sprites.next();
 		setImage(sprites.getImage());
@@ -76,10 +101,16 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 	
 	// Getters and setters
 	
+	/*
+	 * Overrides the getImage Method in the implemented interface
+	 */ 
 	public Image getImage() {
 		return sprites.getImage();
 	}
 
+	/*
+	 * Overrides the setImage Method in the implemented interface
+	 */ 
 	public void setImage(Image image) {
 		this.getSprite().setImage(image);
 	}

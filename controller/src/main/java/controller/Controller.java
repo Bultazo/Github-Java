@@ -4,25 +4,61 @@ import contract.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author DELL
+ *
+ */
 public class Controller implements IController {
 
+	/**
+	 * The view
+	 */
 	private IView view;
+	/**
+	 * The model
+	 */
 	private IModel model;
+	/**
+	 * The clock
+	 */
 	private Clock clock;
+	/**
+	 * The move
+	 */
 	private ClockLorann move;
 
+	/**
+	 * The list of monsters to be killed
+	 */
 	private ArrayList<IMobileElement> DeadMonsters;
+	/**
+	 * The RefreshMonster
+	 */
 	private int RefreshMonster;
+	/**
+	 * Lorann
+	 */
 	private IMobileElement lorann;
+	/**
+	 * The spell
+	 */
 	private IMobileElement spell;
+	/**
+	 * The scoreLevel
+	 */
 	private int scoreLevel;
 
+	/**
+	 * The main constructor 
+	 */
 	public Controller(final IView view, final IModel model) {
 		this.view = view;
 		this.model = model;
-		this.view.setController(this);
 	}
 
+	/*
+	 * Overrides the start Method in the implemented interface 
+	 */ 
 	public void start() {
 		this.init();
 
@@ -34,6 +70,10 @@ public class Controller implements IController {
 
 	}
 
+	/**
+	 * Initialize all the needed variables to fresh
+	 * @return void
+	 */
 	public void init() {
 		this.model.loadMap(1); // On charge la première map
 		this.model.setResurrections(11);
@@ -43,6 +83,10 @@ public class Controller implements IController {
 		this.scoreLevel = model.getScore();
 	}
 
+	/**
+	 * Ends the game (1 Life lost) 
+	 * @return void
+	 */
 	public void gameOver() {
 		this.model.setResurrections(this.model.getResurrections() - 1);
 		this.clock.setStopped(true);
@@ -61,12 +105,18 @@ public class Controller implements IController {
 		}
 	}
 
+	/*
+	 * Overrides the updateSprite Method in the implemented interface
+	 */ 
 	public void updateSprite() {
 		if (this.lorann != null) {
 			((IAnimatedSprite) this.lorann).next();
 		}
 	}
 
+	/*
+	 * Overrides the updateController Method in the implemented interface
+	 */ 
 	public void updateController() {
 		AIMonster();
 		moveSpell();
@@ -78,6 +128,9 @@ public class Controller implements IController {
 		model.flush();
 	}
 
+	/*
+	 * Overrides the orderPerform Method in the implemented interface
+	 */ 
 	public void orderPerform(ControllerOrder controllerOrder) throws IOException {
 		if (controllerOrder != null) {
 			if (lorann != null) {
@@ -139,6 +192,9 @@ public class Controller implements IController {
 		}
 	}
 
+	/*
+	 * Overrides the contactHero Method in the implemented interface
+	 */ 
 	public synchronized boolean contactHero(int x, int y) {
 		if (model.getMap().getElement(x, y) != null) {
 			if ((model.getMap().getElement(x, y).getPermeability()) == Permeability.PENETRABLE) {
@@ -187,12 +243,26 @@ public class Controller implements IController {
 					return false;
 				}
 			}
+			if (isSpell()) {
+				int xHero = lorann.getX();
+				int xSpell = spell.getX();
+				int yHero = lorann.getY();
+				int ySpell = spell.getY();
+
+				if (xHero == xSpell && yHero == ySpell) {
+					destroySpell();
+				}
+			}
+
 			return true;
 		}
 		return false;
 
 	}
 
+	/*
+	 * Overrides the contactMonster Method in the implemented interface
+	 */ 
 	public synchronized boolean contactMonster(int x, int y, IMobileElement monster) {
 		int notInContact = 0;
 		if (model.getMap().getElement(x, y) == null && lorann != null) {
@@ -223,14 +293,25 @@ public class Controller implements IController {
 		return false;
 	}
 
+	/*
+	 * Overrides the AIMonster Method in the implemented interface
+	 */ 
 	public synchronized void AIMonster() {
 
 	}
 
+	/**
+	 * Gets the view
+	 * @return IView
+	 */
 	public IView getView() {
 		return view;
 	}
 
+	/**
+	 * Verifies if no spell is already created then cast the spell
+	 * @return void
+	 */
 	public void castSpell() throws IOException {
 		if (!isSpell()) {
 			model.createSpell("fireball");
@@ -238,6 +319,10 @@ public class Controller implements IController {
 		}
 	}
 
+	/**
+	 * Verifies if no spell is created
+	 * @return boolean
+	 */
 	public boolean isSpell() {
 		if (spell != null)
 			return true;
@@ -245,6 +330,10 @@ public class Controller implements IController {
 		return false;
 	}
 
+	/**
+	 * Moves the spell according to its direction
+	 * @return void
+	 */
 	public synchronized void moveSpell() {
 
 		if (isSpell()) {
@@ -283,6 +372,10 @@ public class Controller implements IController {
 		}
 	}
 
+	/**
+	 * Verifies if there is no element blocking the spell from being created
+	 * @return boolean
+	 */
 	public boolean canCastSpell(ControllerOrder direction) {
 		switch (direction) {
 		case UP:
@@ -311,10 +404,18 @@ public class Controller implements IController {
 		return false;
 	}
 
+	/**
+	 * Destroys the spell
+	 * @return void
+	 */
 	public synchronized void destroySpell() {
 		model.getMap().setSpell(null);
 	}
 
+	/**
+	 * Destroys the monster
+	 * @return void
+	 */
 	public synchronized void destroyMonster(IMobileElement monster) {
 		model.getMap().getMobiles().remove(monster);
 	}

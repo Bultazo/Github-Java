@@ -11,6 +11,7 @@ public interface ISprite{
      *      The image.
      */
     void setImage(Image image);
+    
     /**
      * Gets the Image.
      *
@@ -18,7 +19,5 @@ public interface ISprite{
      *      The image.
      */
     Image getImage();
-
-    
 
 }
