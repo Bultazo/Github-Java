@@ -25,7 +25,7 @@ public class Monster extends MobileElement {
 	 */
 	public Monster(String path, IModel model) throws IOException {
 		super((new Sprite(ImageIO.read(new File("sprite/" + path + ".png")))), Permeability.BLOCKING,
-				StateElement.MONSTER);
+				StateElement.NOP);
 		this.model = model;
 	}
 

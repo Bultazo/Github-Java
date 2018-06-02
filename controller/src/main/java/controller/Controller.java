@@ -183,6 +183,7 @@ public class Controller implements IController {
 			switch (controllerOrder) {
 			case RETRY:
 				if (this.model.getResurrections() <= 0) {
+					Sounds.GAMEOVER.stop();
 					this.init();
 				} else {
 					DeadMonsters.clear();
@@ -305,26 +306,27 @@ public class Controller implements IController {
 
 		for (IMobileElement monster : model.getMap().getMobiles()) {
 			if (lorann != null && model.getMap().getHero() != null) {
-				if (Math.abs(lorann.getX() - monster.getX()) <= 2 && Math.abs(lorann.getX() - monster.getX()) <= 2) {
-
-					if (lorann.getX() > monster.getX()) {
-						if (contactMonster(monster.getX() + 1, monster.getY(), monster)) {
-							monster.moveRight();
+				if (Math.abs(lorann.getX() - monster.getX()) <= 4 && Math.abs(lorann.getX() - monster.getX()) <= 4) {
+					monster.setStateElement(StateElement.MONSTER);
+				}
+				if (monster.getStateElement() == StateElement.MONSTER) {
+					if (lorann.getY() > monster.getY()) {
+						if (contactMonster(monster.getX(), monster.getY() + 1, monster)) {
+							monster.moveDown();
 						}
 
-					} else if (lorann.getX() < monster.getX()) {
-						if (contactMonster(monster.getX() - 1, monster.getY(), monster)) {
-							monster.moveLeft();
+					} else if (lorann.getY() < monster.getY()) {
+						if (contactMonster(monster.getX(), monster.getY() - 1, monster)) {
+							monster.moveUp();
 						}
 					} else {
-						if (lorann.getY() < monster.getY()) {
-							if (contactMonster(monster.getX(), monster.getY() - 1, monster)) {
-								monster.moveUp();
+						if (lorann.getX() < monster.getX()) {
+							if (contactMonster(monster.getX() - 1, monster.getY(), monster)) {
+								monster.moveLeft();
 							}
-						}
-						else if (lorann.getY() > monster.getY()) {
-							if (contactMonster(monster.getX(), monster.getY() + 1, monster)) {
-								monster.moveDown();
+						} else if (lorann.getX() > monster.getX()) {
+							if (contactMonster(monster.getX() + 1, monster.getY(), monster)) {
+								monster.moveRight();
 							}
 						}
 					}

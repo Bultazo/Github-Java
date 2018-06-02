@@ -57,6 +57,7 @@ public enum Sounds {
 
 	/**
 	 * The main constructor for Sounds
+	 * @param soundFileName
 	 */
 	Sounds(String soundFileName) {
 		try {
@@ -76,29 +77,36 @@ public enum Sounds {
 
 	/**
 	 * Plays the clip
-	 * @return void
+	 * 
 	 */
 	public void play() {
-		if (clip.isRunning()) {
-			clip.stop();
-		}
+		stop();
 		clip.setFramePosition(0);
 		clip.start();
 	}
 
 	/**
 	 * Loops the clip
-	 * @return void
+	 * 
 	 */
 	public void loop() {
 		while (true) {
 			clip.loop(1);
 		}
 	}
+	
+	/**
+	 * Stops the clip
+	 */
+	public void stop() {
+		if (clip.isRunning()) {
+			clip.stop();
+		}
+	}
 
 	/**
 	 * Initialize all the values
-	 * @return void
+	 * 
 	 */
 	static void init() {
 		values();
