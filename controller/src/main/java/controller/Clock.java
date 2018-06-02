@@ -15,24 +15,14 @@ public class Clock extends Thread implements IClock {
 	}
 
 	public synchronized void run() {
-		while (true) {
-			if (controller.getView().isMoving()) {
-				try {
-					controller.orderPerform(controller.getView().getOrder());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			if (!stopped) {
-				controller.updateController();
-			}
+		while (!stopped) {
+			controller.updateController();
 			try {
 				Thread.sleep(time);
 			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
 
 	}

@@ -9,6 +9,7 @@ import java.util.Observer;
 import contract.ControllerOrder;
 import contract.IElement;
 import contract.IMap;
+import contract.IModel;
 import model.dao.ExampleDAO;
 
 /**
@@ -17,16 +18,15 @@ import model.dao.ExampleDAO;
  * @author Jean-Aymeric DIET jadiet@cesi.fr
  * @version 1.0
  */
-public final class ModelFacade  {
+public final class ModelFacade implements IModel{
 
 	private Model model;
-    /**
-     * Instantiates a new model facade.
-     */
+ 
     public ModelFacade() {
         this.model = new Model();
     }
     
+
     public IMap getMap() {
     	return this.model.getMap();
     }
@@ -39,23 +39,15 @@ public final class ModelFacade  {
 		this.model.flush();
 	}
 
-	public void setMessage(String message) {
-		this.model.setMessage(message);
+	public void createSpell(String path) throws IOException{
+		this.model.createSpell(path);
 	}
 
-	public String getMessage() {
-		return this.model.getMessage();
+	public void setOpenDoor(IElement element) {
+		this.model.setOpenDoor(element);
 	}
 
-	void createSpell(String path, ControllerOrder direction) throws IOException{
-		this.model.createSpell(path, direction);
-	}
-
-	void setDoor(IElement element) {
-		this.model.setDoor(element);
-	}
-
-	int testType(IElement element) {
+	public int testType(IElement element) {
 		return this.model.testType(element);
 	}
 	
@@ -63,8 +55,10 @@ public final class ModelFacade  {
 		this.model.addObserver(o);
 	}
 	
+	// Database Access
+	
 	public ResultSet getElementById(final int id) throws SQLException {
-		return ExampleDAO.getElementById(id);
+		return this.model.getElementById(id);
 	}
 
 	public ResultSet getElementByName(String name) throws SQLException {
@@ -75,5 +69,36 @@ public final class ModelFacade  {
 	public ResultSet getAllElements() throws SQLException {
 		// TODO Auto-generated method stub
 		return ExampleDAO.getAllElements();
+	}
+	
+	// Getters and setters
+	
+	public void setMessage(String message) {
+		this.model.setMessage(message);
+	}
+
+	public String getMessage() {
+		return this.model.getMessage();
+	}
+
+	@Override
+	public void setResurrections(int resurrections) {
+		this.model.setResurrections(resurrections);
+		
+	}
+
+	@Override
+	public int getResurrections() {
+		return this.model.getResurrections();
+	}
+
+	@Override
+	public void setScore(int i) {
+		this.model.setScore(i);
+	}
+
+	@Override
+	public int getScore() {
+		return this.model.getScore();
 	}
 }

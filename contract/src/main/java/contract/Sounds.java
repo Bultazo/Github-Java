@@ -13,7 +13,7 @@ import javax.sound.sampled.*;
  */
 public enum Sounds {
 
-	EXPLOSION("Sounds/Explosion.wav"), COIN("Sounds/Powerup.wav"), SPELL("Sounds/Laser.wav"), DOOR("Sounds/Door.wav"), 
+	EXPLOSION("Sounds/Explosion.wav"), COIN("Sounds/Coin.wav"), SPELL("Sounds/Laser.wav"), DOOR("Sounds/Door.wav"), 
 	HIT("Sounds/Hit.wav"), GAMEOVER("Sounds/GameOver.wav"), YOUWIN1("Sounds/YouWin1.wav"), YOUWIN2("Sounds/YouWin2.wav");
 
 	private Clip clip;

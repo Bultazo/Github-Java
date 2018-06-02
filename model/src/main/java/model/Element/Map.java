@@ -26,13 +26,28 @@ public class Map implements IMap{
     private IMobileElement spell;
 
     public Map(int height, int width) {
-
         this.height = height;
         this.width = width;
         elements=new Element[this.height][this.width];
         mobiles=new ArrayList<IMobileElement>();
     }
 
+    public void addElementToMap(IElement element, int x, int y)
+    {
+        this.elements[x][y]=element;
+    }
+
+
+	// Getters and setters
+    
+    public int getID() {
+        return ID;
+    }
+
+    
+    public void setID(int ID) {
+        this.ID = ID;
+    }
     
     public IElement getElement(int x, int y) {
         return elements[x][y];
@@ -52,22 +67,6 @@ public class Map implements IMap{
     public ArrayList<IMobileElement> getMobiles() {
         return mobiles;
     }
-
-    public void addElementToMap(IElement element, int x, int y)
-    {
-        this.elements[x][y]=element;
-    }
-
-
-    public int getID() {
-        return ID;
-    }
-
-    
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     
     public void setHeroPosition(int x, int y){
         this.hero.setX(x);

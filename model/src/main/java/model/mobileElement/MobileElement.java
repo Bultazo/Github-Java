@@ -15,6 +15,8 @@ public class MobileElement extends Element implements IMobileElement{
     private StateElement stateElement;
   
     private ControllerOrder direction;
+    
+    protected IModel model;
 
     public MobileElement(Sprite sprite, Permeability permeability, StateElement stateElement) {
         super(sprite,permeability,stateElement);

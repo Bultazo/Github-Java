@@ -9,7 +9,8 @@ public class Controller implements IController {
 	private IView view;
 	private IModel model;
 	private Clock clock;
-	public ClockAnimation anim;
+	private ClockLorann move;
+
 	private ArrayList<IMobileElement> DeadMonsters;
 	private int RefreshMonster;
 	private IMobileElement lorann;
@@ -20,7 +21,6 @@ public class Controller implements IController {
 		this.view = view;
 		this.model = model;
 		this.view.setController(this);
-		this.start();
 	}
 
 	public void start() {
@@ -29,12 +29,13 @@ public class Controller implements IController {
 		clock = new Clock(this);
 		clock.start();
 
-		anim = new ClockAnimation(this);
-		anim.start();
+		move = new ClockLorann(this);
+		move.start();
+
 	}
-	
+
 	public void init() {
-		this.model.loadMap(5); // On charge la première map
+		this.model.loadMap(1); // On charge la première map
 		this.model.setResurrections(11);
 		this.model.setScore(0);
 		this.lorann = model.getMap().getHero();
@@ -45,7 +46,7 @@ public class Controller implements IController {
 	public void gameOver() {
 		this.model.setResurrections(this.model.getResurrections() - 1);
 		this.clock.setStopped(true);
-		
+
 		model.getMap().setHero(null);
 		lorann = null;
 
@@ -78,65 +79,64 @@ public class Controller implements IController {
 	}
 
 	public void orderPerform(ControllerOrder controllerOrder) throws IOException {
-		if (lorann != null && controllerOrder != null) {
+		if (controllerOrder != null) {
+			if (lorann != null) {
+				switch (controllerOrder) {
+				case UP:
+					lorann.setDirection(controllerOrder);
+					if (contactHero(lorann.getX(), lorann.getY() - 1)) {
+						lorann.moveUp();
+					}
+					break;
+				case DOWN:
+					lorann.setDirection(controllerOrder);
+					if (contactHero(lorann.getX(), lorann.getY() + 1)) {
+						lorann.moveDown();
+					}
+					break;
+				case LEFT:
+					lorann.setDirection(controllerOrder);
+					if (contactHero(lorann.getX() - 1, lorann.getY())) {
+						lorann.moveLeft();
+					}
+					break;
+				case RIGHT:
+					lorann.setDirection(controllerOrder);
+					if (contactHero(lorann.getX() + 1, lorann.getY())) {
+						lorann.moveRight();
+					}
+					break;
+				case SPACE:
+					if (canCastSpell(lorann.getDirection())) {
+						castSpell();
+						spell = model.getMap().getSpell();
+					}
+					break;
+				default:
+					break;
+				}
+
+			}
 			switch (controllerOrder) {
-			case UP:
-				lorann.setDirection(controllerOrder);
-				if (contactHero(lorann.getX(), lorann.getY() - 1)) {
-					lorann.moveUp();
+			case RETRY:
+				if (this.model.getResurrections() <= 0) {
+					this.init();
+				} else {
+					DeadMonsters.clear();
+					model.loadMap(model.getMap().getID());
+					model.setMessage("");
+					lorann = model.getMap().getHero();
+					model.setScore(scoreLevel);
+					model.flush();
 				}
-				break;
-			case DOWN:
-				lorann.setDirection(controllerOrder);
-				if (contactHero(lorann.getX(), lorann.getY() + 1)) {
-					lorann.moveDown();
+				if (clock.isStopped()) {
+					clock.setStopped(false);
+					clock = new Clock(this);
+					clock.start();
 				}
-				break;
-			case LEFT:
-				lorann.setDirection(controllerOrder);
-				if (contactHero(lorann.getX() - 1, lorann.getY())) {
-					lorann.moveLeft();
-				}
-				break;
-			case RIGHT:
-				lorann.setDirection(controllerOrder);
-				if (contactHero(lorann.getX() + 1, lorann.getY())) {
-					lorann.moveRight();
-				}
-				break;
-			case SPACE:
-				if (canCastSpell(lorann.getDirection())) {
-					castSpell();
-					spell = model.getMap().getSpell();
-				}
-				break;
-			default:
 				break;
 			}
-
 		}
-		switch (controllerOrder) {
-		case RETRY:
-			if (this.model.getResurrections() <= 0) {
-				this.init();
-			} else {
-				DeadMonsters.clear();
-				model.loadMap(model.getMap().getID());
-				model.setMessage("");
-				lorann = model.getMap().getHero();
-				model.setScore(scoreLevel);
-				model.flush();
-			}
-			if (clock.isStopped()) {
-				clock.setStopped(false);
-
-				anim.setStopped(true);
-				anim = new ClockAnimation(this);
-				anim.start();
-			}
-			break;
-		}
-
 	}
 
 	public synchronized boolean contactHero(int x, int y) {
@@ -154,22 +154,23 @@ public class Controller implements IController {
 
 					} else if (model.testType(model.getMap().getElement(x, y)) == 4) {
 						Sounds.DOOR.play();
-						
+
 						model.getMap().setElement(x, y, null);
 						model.setOpenDoor(model.getMap().getDoor());
 					}
 				} else if (model.getMap().getElement(x, y).getStateElement() == StateElement.DOOR) {
-					
+
 					this.scoreLevel = model.getScore();
 					if (model.getMap().getID() < 5) {
 						model.loadMap(model.getMap().getID() + 1);
 						lorann = model.getMap().getHero();
 					} else {
-						
+
 						model.loadMap(6);
 						model.setMessage("CONGRATULATIONS, YOU WIN !!! ;)");
 						lorann = model.getMap().getHero();
-						Sounds.YOUWIN2.play();
+						model.flush();
+						Sounds.YOUWIN2.loop();
 					}
 					return true;
 				}

@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Spell extends MobileElement implements IAnimatedSprite {
 
 	private AnimatedSprite sprites;
-	private IModel model;
+
 
 	public Spell(String path, IModel model) throws IOException {
 		super((new Sprite(ImageIO.read(new File("sprite/fireball_1.png")))), Permeability.PENETRABLE,
@@ -21,8 +21,9 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 		this.model = model;
 	}
 
+	// Movement 
+	
 	public void moveLeft() {
-
 		if (model.getMap().getElement(this.getX() - 1, this.getY()) == null) {
 			this.setDirection(ControllerOrder.LEFT);
 			this.setX(this.getX() - 1);
@@ -33,7 +34,6 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 	}
 
 	public void moveRight() {
-
 		if (model.getMap().getElement(this.getX() + 1, this.getY()) == null) {
 			this.setDirection(ControllerOrder.RIGHT);
 			this.setX(this.getX() + 1);
@@ -67,11 +67,15 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 		model.flush();
 	}
 
+	// Animation 
+	
 	public void next() {
 		sprites.next();
 		setImage(sprites.getImage());
 	}
-
+	
+	// Getters and setters
+	
 	public Image getImage() {
 		return sprites.getImage();
 	}

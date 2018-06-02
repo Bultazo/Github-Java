@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class Hero extends MobileElement implements IAnimatedSprite {
 	private AnimatedSprite sprites;
-	private IModel model;
 
 	public Hero(IModel model) throws IOException {
 
@@ -19,9 +18,11 @@ public class Hero extends MobileElement implements IAnimatedSprite {
 		String Animation[] = { "lorann_b", "lorann_bl", "lorann_l", "lorann_ul", "lorann_u", "lorann_ur", "lorann_r",
 				"lorann_br", };
 
-		sprites = new AnimatedSprite((ImageIO.read(new File("sprite/lorann_b.png"))), Animation);
+		sprites = new AnimatedSprite((ImageIO.read(new File("sprite/lorann_u.png"))), Animation);
 	}
-
+	
+	// Movement
+	
 	public void moveLeft() {
 		model.getMap().getHero().setX(model.getMap().getHero().getX() - 1);
 		this.setImage(sprites.getImages()[2]);
@@ -50,7 +51,9 @@ public class Hero extends MobileElement implements IAnimatedSprite {
 		sprites.next();
 		setImage(sprites.getImage());
 	}
-
+	
+	// Getters and setters
+	
 	public Image getImage() {
 		return sprites.getImage();
 	}

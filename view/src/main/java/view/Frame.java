@@ -24,10 +24,9 @@ public class Frame extends JFrame {
 
 	public Frame(final IModel model) throws HeadlessException {
 		this.model = model;
-		this.buildViewFrame(model);
 	}
 
-	private void buildViewFrame(final IModel model) {
+	void buildViewFrame() {
 		this.setTitle("Lorann (BEST GAME EVER)");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);

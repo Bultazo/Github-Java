@@ -5,7 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-
+import java.util.LinkedList;
+import java.util.Queue;
 
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -21,23 +22,29 @@ public class ViewFacade implements IView, Runnable, KeyListener {
 	private IController controller;
 	private ControllerOrder order;
 	private boolean isMoving = false;
-	
+
 	public ViewFacade(final IModel model) {
 		this.viewFrame = new Frame(model);
+		this.buildViewFrame();
+		
 		SwingUtilities.invokeLater(this);
 	}
-
+	
+	public void buildViewFrame() {
+		this.viewFrame.buildViewFrame();
+	}
+	
 	public void run() {
 		this.viewFrame.addKeyListener(this);
 		this.viewFrame.setVisible(true);
 	}
-
+	
+	
+	// Key Listeners 
+	
 	public void keyPressed(final KeyEvent e) {
 		setMoving(true);
 		this.order = Frame.keyCodeToControllerOrder(e);
-	}
-	public ControllerOrder getOrder() {
-		return order;
 	}
 
 	public void keyTyped(final KeyEvent e) {
@@ -47,9 +54,16 @@ public class ViewFacade implements IView, Runnable, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		setMoving(false);
+		
 	}
 
+	
+	// Getters and setters 
+	
+	public ControllerOrder getOrder() {
+		return order;
+	}
+	
 	public void setController(final IController controller) {
 		this.controller = controller;
 	}

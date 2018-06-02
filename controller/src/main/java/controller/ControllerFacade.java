@@ -17,11 +17,11 @@ public class ControllerFacade {
 
 	public ControllerFacade(IView view, IModel model) {
 		this.controller = new Controller(view, model);
-		this.Start();
+		this.start();
 	}
 
-	public void Start() {
-		
+	public void start() {
+		this.controller.start();
 	}
 
 	public synchronized void updateController() {

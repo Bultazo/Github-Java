@@ -29,17 +29,9 @@ public class AnimatedSprite extends Sprite implements IAnimatedSprite {
         }
         this.step = 0;
     }
-
-
-    public Image[] getImages() {
-		return images;
-	}
-
-
-	public void setImages(Image[] images) {
-        this.images = images;
-    }
-
+    
+    // Animation 
+    
     public void next()
     {
         this.step++;
@@ -47,6 +39,17 @@ public class AnimatedSprite extends Sprite implements IAnimatedSprite {
             this.step = 0;
         }
         setImage(images[step]);
+    }
+
+    // Getters and setters 
+    
+    public Image[] getImages() {
+		return images;
+	}
+
+
+	public void setImages(Image[] images) {
+        this.images = images;
     }
 
     public Image getImage() {

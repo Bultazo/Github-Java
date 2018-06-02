@@ -18,4 +18,6 @@ public interface IView {
 	ControllerOrder getOrder();
 	
 	boolean isMoving();
+	
+	void setMoving(boolean isMoving); 
 }

@@ -45,5 +45,7 @@ public interface IController {
 	void updateController() ;
 
 	void updateSprite();
+	
+	void start();
 
 }
