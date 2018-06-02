@@ -27,5 +27,9 @@ public interface IMap {
      IMobileElement getSpell();
 
      void setSpell(IMobileElement spell);
+     
+     IElement getDoor();
+     
+     void setDoor(IElement Door);
 
     }

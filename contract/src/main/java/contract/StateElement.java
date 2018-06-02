@@ -17,9 +17,9 @@ public enum StateElement {
     /** C'est un sortilège. */
     SPELL,
 
-    /** C'est mort */
-    DEATH,
-    
     /** C'est le Héros */
     NOP,
+    
+    /** C'est un Monstre, Boooh */
+    MONSTER,
 }

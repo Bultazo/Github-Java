@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Observable;
-
 import contract.*;
 import model.mobileElement.*;
 import model.motionLessElement.*;
 import model.Element.*;
 import model.dao.ExampleDAO;
-
 import javax.imageio.ImageIO;
 
 public class Model extends Observable implements IModel {
@@ -67,9 +65,11 @@ public class Model extends Observable implements IModel {
 					break;
 				case ("Porte"):
 					e = new Door();
+					map.setDoor(e);
 					break;
 				case ("Player"):
 					Hero h = new Hero(this);
+					h.setDirection(ControllerOrder.NOP);
 					map.setHero(h);
 					map.setHeroPosition(resultSet.getInt("X"), resultSet.getInt("Y"));
 					break;
@@ -142,47 +142,39 @@ public class Model extends Observable implements IModel {
 		return 0;
 	}
 
-	public void createSpell(String path, ControllerOrder direction) throws IOException {
-		IMobileElement spell = new Spell(path, direction);
+	public void createSpell(String path) throws IOException {
+		IMobileElement spell = new Spell(path, this);
 		IMobileElement lorann = map.getHero();
 		map.setSpell(spell);
-
+		
 		switch (lorann.getDirection()) {
 		case UP:
 			map.getSpell().setY(lorann.getY() + 1);
 			map.getSpell().setX(lorann.getX());
+			map.getSpell().setDirection(ControllerOrder.DOWN);
 			break;
 
 		case DOWN:
 			map.getSpell().setY(lorann.getY() - 1);
 			map.getSpell().setX(lorann.getX());
+			map.getSpell().setDirection(ControllerOrder.UP);
 			break;
 
 		case RIGHT:
 			map.getSpell().setY(lorann.getY());
 			map.getSpell().setX(lorann.getX() - 1);
+			map.getSpell().setDirection(ControllerOrder.LEFT);
 			break;
 
 		case LEFT:
 			map.getSpell().setY(lorann.getY());
 			map.getSpell().setX(lorann.getX() + 1);
+			map.getSpell().setDirection(ControllerOrder.RIGHT);
 			break;
 		default:
 			break;
 		}
-		map.getSpell().setDirection(direction);
-	}
-
-	public void setDoor(IElement element) {
-		try {
-			element.setSprite(new Sprite(ImageIO.read(new File(
-					"C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/gate_open.png"))));
-			element.setPermeability(Permeability.PENETRABLE);
-			element.setStateElement(StateElement.DOOR);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Sounds.SPELL.play();
 	}
 	
 	public Map getMap() {
@@ -216,5 +208,19 @@ public class Model extends Observable implements IModel {
     public int getScore() {
         return this.score;
     }
+
+	public void setOpenDoor(IElement element) {
+		// TODO Auto-generated method stub
+		try {
+			element.setSprite(new Sprite(ImageIO.read(new File(
+					"C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/gate_open.png"))));
+			element.setPermeability(Permeability.PENETRABLE);
+			element.setStateElement(StateElement.DOOR);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 }

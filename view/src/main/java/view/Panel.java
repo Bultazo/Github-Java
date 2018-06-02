@@ -82,7 +82,7 @@ class Panel extends JPanel implements Observer {
 	void drawSpell(Graphics g) {
 		IMobileElement spell = viewFrame.getModel().getMap().getSpell();
 		IMobileElement lorann = viewFrame.getModel().getMap().getHero();
-		if (spell != null && (spell.getX() != lorann.getX() || spell.getY() != lorann.getY())) {
+		if (spell != null && lorann != null && (spell.getX() != lorann.getX() || spell.getY() != lorann.getY())) {
 			g.drawImage((viewFrame.getModel().getMap().getSpell().getSprite().getImage()),
 					viewFrame.getModel().getMap().getSpell().getX() * ZOOM,
 					viewFrame.getModel().getMap().getSpell().getY() * ZOOM, null);

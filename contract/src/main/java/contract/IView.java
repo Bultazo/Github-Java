@@ -14,4 +14,8 @@ public interface IView {
 	 *          the new controller
 	 */
 	void setController(final IController controller);
+	
+	ControllerOrder getOrder();
+	
+	boolean isMoving();
 }

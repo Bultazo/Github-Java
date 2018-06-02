@@ -13,6 +13,8 @@ public class Map implements IMap{
     
     private int height=12;
     
+    private IElement Door;
+    
     private IElement[][] elements;
     
     private ArrayList<IMobileElement> mobiles;
@@ -51,9 +53,6 @@ public class Map implements IMap{
         return mobiles;
     }
 
-
-
-    
     public void addElementToMap(IElement element, int x, int y)
     {
         this.elements[x][y]=element;
@@ -76,7 +75,7 @@ public class Map implements IMap{
     }
 
     
-    public IMobileElement getHero(){
+    public synchronized IMobileElement getHero(){
         return this.hero;
     }
 
@@ -95,6 +94,16 @@ public class Map implements IMap{
     public void setSpell(IMobileElement spell) {
         this.spell = spell;
     }
+
+
+	public IElement getDoor() {
+		return Door;
+	}
+
+
+	public void setDoor(IElement door) {
+		Door = door;
+	}
 
 
 }

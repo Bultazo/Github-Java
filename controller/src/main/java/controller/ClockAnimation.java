@@ -13,7 +13,7 @@ public class ClockAnimation extends Thread implements IClock {
 	private Controller controller;
 	private boolean stopped = false;
 	private int time = 100;
-
+	
 	public ClockAnimation(Controller controller) {
 		this.controller = controller;
 	}

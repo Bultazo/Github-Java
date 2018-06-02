@@ -51,7 +51,7 @@ public interface IModel {
 	 * @throws IOException
 	 * 			Can't read the file
 	 */
-	void createSpell(String path, ControllerOrder direction) throws IOException;
+	void createSpell(String path) throws IOException;
 
 	/**
 	 * Sets the door.
@@ -60,7 +60,7 @@ public interface IModel {
 	 * 		The element.
 	 *
 	 */
-	void setDoor(IElement element);
+	void setOpenDoor(IElement element);
 
 	/**
 	 * @param element
