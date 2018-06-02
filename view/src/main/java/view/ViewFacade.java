@@ -46,7 +46,7 @@ public class ViewFacade implements IView, Runnable, KeyListener {
 	
 	/**
 	 * The Frame's BuildViewFrame Method
-	 * @return void
+	 * 
 	 */
 	public void buildViewFrame() {
 		this.viewFrame.buildViewFrame();

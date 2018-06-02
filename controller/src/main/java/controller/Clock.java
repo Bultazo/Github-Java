@@ -20,7 +20,7 @@ public class Clock extends Thread implements IClock {
 	/**
 	 * The time
 	 */
-	private int time = 100;
+	private int time = 120;
 
 	/**
 	 * The main constructor 

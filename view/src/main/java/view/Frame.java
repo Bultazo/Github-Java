@@ -37,7 +37,7 @@ public class Frame extends JFrame {
 
 	/**
 	 * Builds a frame (Setting size, adding observers etc..)
-	 * @return void
+	 * 
 	 */
 	void buildViewFrame() {
 		this.setTitle("Lorann (BEST GAME EVER)");
@@ -53,7 +53,7 @@ public class Frame extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Converts the KeyCode of the keyListener to an order
 	 * @return ControllerOrder
 	 */
 	static ControllerOrder keyCodeToControllerOrder(final KeyEvent e) {

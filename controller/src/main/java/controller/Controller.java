@@ -33,13 +33,18 @@ public class Controller implements IController {
 	private ClockLorann move;
 
 	/**
+	 * The count of lateral boucing of the monster
+	 */
+	private int monsterCountX = 0;
+	/**
+	 * The count of vertical bouncing of the monster
+	 */
+	private int monsterCountY = 0;
+	/**
 	 * The list of monsters to be killed
 	 */
 	private ArrayList<IMobileElement> DeadMonsters;
-	/**
-	 * The RefreshMonster
-	 */
-	private int RefreshMonster;
+
 	/**
 	 * Lorann
 	 */
@@ -80,7 +85,7 @@ public class Controller implements IController {
 	 * 
 	 */
 	public void init() {
-		this.model.loadMap(1); // On charge la première map
+		this.model.loadMap(7); // On charge la première map
 		this.model.setResurrections(11);
 		this.model.setScore(0);
 		this.lorann = model.getMap().getHero();
@@ -138,7 +143,7 @@ public class Controller implements IController {
 	 */
 	public void orderPerform(ControllerOrder controllerOrder) throws IOException {
 		if (controllerOrder != null) {
-			if (lorann != null) {
+			if (lorann != null && model.getMap().getHero() != null) {
 				switch (controllerOrder) {
 				case UP:
 					lorann.setDirection(controllerOrder);
@@ -179,12 +184,12 @@ public class Controller implements IController {
 			case RETRY:
 				if (this.model.getResurrections() <= 0) {
 					this.init();
-				} 
-				else {
+				} else {
 					DeadMonsters.clear();
 					model.loadMap(model.getMap().getID());
 					model.setMessage("");
 					lorann = model.getMap().getHero();
+					spell = null;
 					model.setScore(scoreLevel);
 					model.flush();
 				}
@@ -266,57 +271,119 @@ public class Controller implements IController {
 
 	}
 
-
-
 	public synchronized boolean contactMonster(int x, int y, IMobileElement monster) {
-		if (lorann.getX() == x && lorann.getY() == y) { // If contact with the hero.
-			gameOver();
-		} 
-		else if (isSpell()) {
-			if (monster.getX() == spell.getX() && monster.getY() == spell.getY()) {
-				DeadMonsters.add(monster);
-				Sounds.EXPLOSION.play();
-				destroySpell();
-				model.setScore(model.getScore() + 100);
+		if (model.getMap().getElement(x, y) == null) {
+			if (lorann.getX() == x && lorann.getY() == y) { // If there will be a contact with the hero.
+				gameOver();
+			} else if (isSpell()) { // If there is a spell
+				if ((spell.getX() == x && spell.getY() == y)
+						|| (spell.getX() == monster.getX() && spell.getY() == monster.getY())) { // If there will be a
+																									// contact with the
+																									// spell
+					DeadMonsters.add(monster);
+					Sounds.EXPLOSION.play();
+					destroySpell();
+					model.setScore(model.getScore() + 100);
+				}
 			}
-		}
-		for (IMobileElement otherMonster : model.getMap().getMobiles()) {
-			if (otherMonster.getX() == x && otherMonster.getY() == y) {
-				return false;
+			for (IMobileElement otherMonster : model.getMap().getMobiles()) {
+				if (otherMonster.getX() == x && otherMonster.getY() == y) { // If there will be a contact with other
+																			// monsters
+					return false;
+				}
 			}
+		} else {
+			return false;
 		}
 		return true;
 	}
+
 	/*
 	 * Overrides the AIMonster Method in the implemented interface
 	 */
 	public synchronized void AIMonster() {
+
 		for (IMobileElement monster : model.getMap().getMobiles()) {
-			switch (monster.getDirection()) {
-			case DOWN:
-				if (contactMonster(monster.getX(), monster.getY() + 1, monster)) {
-					monster.moveDown();
+			if (lorann != null && model.getMap().getHero() != null) {
+				if (Math.abs(lorann.getX() - monster.getX()) <= 2 && Math.abs(lorann.getX() - monster.getX()) <= 2) {
+
+					if (lorann.getX() > monster.getX()) {
+						if (contactMonster(monster.getX() + 1, monster.getY(), monster)) {
+							monster.moveRight();
+						}
+
+					} else if (lorann.getX() < monster.getX()) {
+						if (contactMonster(monster.getX() - 1, monster.getY(), monster)) {
+							monster.moveLeft();
+						}
+					} else {
+						if (lorann.getY() < monster.getY()) {
+							if (contactMonster(monster.getX(), monster.getY() - 1, monster)) {
+								monster.moveUp();
+							}
+						}
+						else if (lorann.getY() > monster.getY()) {
+							if (contactMonster(monster.getX(), monster.getY() + 1, monster)) {
+								monster.moveDown();
+							}
+						}
+					}
 				}
-				break;
-			case UP:
-				if (contactMonster(monster.getX(), monster.getY() - 1, monster)) {
-					monster.moveUp();
+
+				else {
+					switch (monster.getDirection()) {
+					case DOWN:
+						if (contactMonster(monster.getX(), monster.getY() + 1, monster)) {
+							monster.moveDown();
+							this.monsterCountX = 0;
+						} else if (monsterCountY > 1) {
+							monster.setDirection(ControllerOrder.RIGHT);
+						} else {
+							monster.setDirection(ControllerOrder.UP);
+							this.monsterCountY++;
+						}
+						break;
+					case UP:
+						if (contactMonster(monster.getX(), monster.getY() - 1, monster)) {
+							monster.moveUp();
+							this.monsterCountX = 0;
+						} else if (monsterCountY > 1) {
+							monster.setDirection(ControllerOrder.RIGHT);
+						} else {
+							monster.setDirection(ControllerOrder.DOWN);
+							this.monsterCountY++;
+						}
+						break;
+					case LEFT:
+						if (contactMonster(monster.getX() - 1, monster.getY(), monster)) {
+							monster.moveLeft();
+							this.monsterCountY = 0;
+						} else if (monsterCountX > 1) {
+							monster.setDirection(ControllerOrder.UP);
+						} else {
+							monster.setDirection(ControllerOrder.RIGHT);
+							this.monsterCountX++;
+						}
+						break;
+					case RIGHT:
+						if (contactMonster(monster.getX() + 1, monster.getY(), monster)) {
+							monster.moveRight();
+							this.monsterCountY = 0;
+						} else if (monsterCountX > 1) {
+							monster.setDirection(ControllerOrder.UP);
+						} else {
+							monster.setDirection(ControllerOrder.LEFT);
+							this.monsterCountX++;
+						}
+						break;
+					default:
+						break;
+					}
 				}
-				break;
-			case LEFT:
-				if (contactMonster(monster.getX() - 1, monster.getY(), monster)) {
-					monster.moveLeft();
-				}
-				break;
-			case RIGHT:
-				if (contactMonster(monster.getX() + 1, monster.getY() + 1, monster)) {
-					monster.moveRight();
-				}
-				break;
-			default:
-				break;
 			}
+
 		}
+
 	}
 
 	/**
@@ -345,9 +412,9 @@ public class Controller implements IController {
 	 * @return boolean
 	 */
 	public boolean isSpell() {
-		if (spell != null)
+		if (spell != null) {
 			return true;
-
+		}
 		return false;
 	}
 
@@ -358,6 +425,7 @@ public class Controller implements IController {
 	public synchronized void moveSpell() {
 
 		if (isSpell()) {
+			System.out.println(spell.getDirection());
 			if (lorann != null) {
 				int xHero = lorann.getX();
 				int xSpell = spell.getX();
@@ -432,6 +500,7 @@ public class Controller implements IController {
 	 */
 	public synchronized void destroySpell() {
 		model.getMap().setSpell(null);
+		spell = null;
 	}
 
 	/**

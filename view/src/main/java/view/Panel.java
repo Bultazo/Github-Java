@@ -10,22 +10,45 @@ import contract.*;
 import model.IElement;
 import model.IMobileElement;
 
+/**
+ * @author DELL
+ *
+ */
 class Panel extends JPanel implements Observer {
 
+	/**
+	 * The viewFrame
+	 */
 	private Frame viewFrame;
+	/**
+	 * The ZOOM
+	 */
 	private static final int ZOOM = 32;
+	/**
+	 * The serialVersionUID
+	 */
 	private static final long serialVersionUID = -998294702363713521L;
 
+	/**
+	 * The main constructor 
+	 * @param viewFrame
+	 */
 	Panel(final Frame viewFrame) {
 		this.viewFrame = viewFrame;
 		this.setSize(viewFrame.getWidth(), viewFrame.getHeight());
 		repaint();
 	}
 
+	/*
+	 * Overrides the update Method in the implemented interface
+	 */ 
 	public void update(final Observable arg0, final Object arg1) {
 		this.repaint();
 	}
 
+	/*
+	 * Overrides the paintComponent Method in the implemented interface
+	 */ 
 	@Override
 	protected void paintComponent(final Graphics graphics) {
 		graphics.setColor(Color.black);
@@ -39,6 +62,10 @@ class Panel extends JPanel implements Observer {
 		this.drawMessage(graphics);
 	}
 
+	/**
+	 * Fills the map
+	 * @param g
+	 */
 	void fillMap(Graphics g) {
 		int y, x = 0;
 		for (IElement[] element : viewFrame.getModel().getMap().getElements()) {
@@ -53,6 +80,10 @@ class Panel extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * Draws the score and the lives
+	 * @param g
+	 */
 	void drawGUI(Graphics g) {
 		g.setFont(new Font("Calibri", Font.PLAIN, 30));
 
@@ -66,6 +97,10 @@ class Panel extends JPanel implements Observer {
 				viewFrame.getHeight() - 40);
 	}
 
+	/**
+	 * Draws Lorann (tm)
+	 * @param g
+	 */
 	void drawLorann(Graphics g) {
 		IMobileElement lorann = viewFrame.getModel().getMap().getHero();
 		if (lorann != null) {
@@ -73,6 +108,10 @@ class Panel extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * Draws the monsters
+	 * @param g
+	 */
 	void drawMonsters(Graphics g) {
 		for (IMobileElement element : viewFrame.getModel().getMap().getMobiles()) {
 			if (element != null) {
@@ -81,6 +120,10 @@ class Panel extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * Draws a spell
+	 * @param g
+	 */
 	void drawSpell(Graphics g) {
 		IMobileElement spell = viewFrame.getModel().getMap().getSpell();
 		IMobileElement lorann = viewFrame.getModel().getMap().getHero();
@@ -91,6 +134,11 @@ class Panel extends JPanel implements Observer {
 		}
 	}
 
+
+	/**
+	 * Draws a message
+	 * @param g
+	 */
 	void drawMessage(Graphics g) {
 		// Draw the message (GAME OVER OR YOU WIN)
 		if (viewFrame.getModel().getMessage() != null) {

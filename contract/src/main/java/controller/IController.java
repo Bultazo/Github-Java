@@ -11,7 +11,11 @@ import model.IMobileElement;
  */
 public interface IController {
 
-
+	/**
+	 * 
+	 * The (REALLY BASIC) Monster AI
+	 * 
+	 */
 	void AIMonster();
 
 	/**
