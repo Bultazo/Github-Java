@@ -1,8 +1,8 @@
 package model.Element;
 
-import contract.IElement;
-import contract.IMap;
-import contract.IMobileElement;
+import model.IElement;
+import model.IMap;
+import model.IMobileElement;
 
 import java.util.ArrayList;
 

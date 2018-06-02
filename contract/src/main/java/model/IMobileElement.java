@@ -1,5 +1,7 @@
-package contract;
+package model;
 
+import contract.ControllerOrder;
+import contract.StateElement;
 
 public interface IMobileElement {
 

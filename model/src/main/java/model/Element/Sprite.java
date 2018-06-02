@@ -1,8 +1,8 @@
 package model.Element;
 
-import contract.ISprite;
-
 import java.awt.*;
+
+import model.ISprite;
 
 /**
  * @author DELL

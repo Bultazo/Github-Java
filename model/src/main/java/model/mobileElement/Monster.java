@@ -1,8 +1,8 @@
 package model.mobileElement;
 import contract.ControllerOrder;
-import contract.IModel;
 import contract.Permeability;
 import contract.StateElement;
+import model.IModel;
 import model.Element.*;
 
 import javax.imageio.ImageIO;

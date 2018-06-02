@@ -1,6 +1,8 @@
 package model.mobileElement;
 
 import contract.*;
+import model.IAnimatedSprite;
+import model.IModel;
 import model.Element.*;
 
 import javax.imageio.ImageIO;

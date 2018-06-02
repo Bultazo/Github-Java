@@ -7,6 +7,8 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 import contract.*;
+import model.IElement;
+import model.IMobileElement;
 
 class Panel extends JPanel implements Observer {
 

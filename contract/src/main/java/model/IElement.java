@@ -1,4 +1,8 @@
-package contract;
+package model;
+
+import contract.Permeability;
+import contract.StateElement;
+
 /**
  * 
  * @author DELL

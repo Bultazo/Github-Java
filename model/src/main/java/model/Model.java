@@ -101,6 +101,7 @@ public class Model extends Observable implements IModel {
 					case (1): {
 						MobileElement m = new Monster("monster_1", this);
 						map.getMobiles().add(m);
+						m.setDirection(ControllerOrder.RIGHT);
 						m.setX(resultSet.getInt(("X")));
 						m.setY(resultSet.getInt("Y"));
 						monsterCount++;
@@ -109,6 +110,7 @@ public class Model extends Observable implements IModel {
 					case (2): {
 						MobileElement m = new Monster("monster_2", this);
 						map.getMobiles().add(m);
+						m.setDirection(ControllerOrder.RIGHT);
 						m.setX(resultSet.getInt(("X")));
 						m.setY(resultSet.getInt("Y"));
 						monsterCount++;
@@ -117,6 +119,7 @@ public class Model extends Observable implements IModel {
 					case (3): {
 						MobileElement m = new Monster("monster_3", this);
 						map.getMobiles().add(m);
+						m.setDirection(ControllerOrder.RIGHT);
 						m.setX(resultSet.getInt(("X")));
 						m.setY(resultSet.getInt("Y"));
 						monsterCount++;
@@ -125,6 +128,7 @@ public class Model extends Observable implements IModel {
 					case (4): {
 						MobileElement m = new Monster("monster_4", this);
 						map.getMobiles().add(m);
+						m.setDirection(ControllerOrder.RIGHT);
 						m.setX(resultSet.getInt(("X")));
 						m.setY(resultSet.getInt("Y"));
 						monsterCount++;

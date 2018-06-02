@@ -1,4 +1,7 @@
 package model.mobileElement;
+import model.IMobileElement;
+import model.IModel;
+import model.ISprite;
 import model.Element.*;
 import contract.*;
 

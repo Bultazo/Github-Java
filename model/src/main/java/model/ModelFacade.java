@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Observer;
 
 import contract.ControllerOrder;
-import contract.IElement;
-import contract.IMap;
-import contract.IModel;
 import model.dao.ExampleDAO;
 
 

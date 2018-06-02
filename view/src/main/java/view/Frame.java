@@ -9,8 +9,8 @@ import java.util.Observer;
 import javax.swing.*;
 
 import contract.ControllerOrder;
-import contract.IController;
-import contract.IModel;
+import controller.IController;
+import model.IModel;
 
 
 /**

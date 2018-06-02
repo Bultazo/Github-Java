@@ -1,6 +1,11 @@
 package controller;
 
 import contract.*;
+import model.IAnimatedSprite;
+import model.IMobileElement;
+import model.IModel;
+import view.IView;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -49,7 +54,7 @@ public class Controller implements IController {
 	private int scoreLevel;
 
 	/**
-	 * The main constructor 
+	 * The main constructor
 	 */
 	public Controller(final IView view, final IModel model) {
 		this.view = view;
@@ -57,8 +62,8 @@ public class Controller implements IController {
 	}
 
 	/*
-	 * Overrides the start Method in the implemented interface 
-	 */ 
+	 * Overrides the start Method in the implemented interface
+	 */
 	public void start() {
 		this.init();
 
@@ -84,7 +89,7 @@ public class Controller implements IController {
 	}
 
 	/**
-	 * Ends the game (1 Life lost) 
+	 * Ends the game (1 Life lost)
 	 * 
 	 */
 	public void gameOver() {
@@ -107,7 +112,7 @@ public class Controller implements IController {
 
 	/*
 	 * Overrides the updateSprite Method in the implemented interface
-	 */ 
+	 */
 	public void updateSprite() {
 		if (this.lorann != null) {
 			((IAnimatedSprite) this.lorann).next();
@@ -116,7 +121,7 @@ public class Controller implements IController {
 
 	/*
 	 * Overrides the updateController Method in the implemented interface
-	 */ 
+	 */
 	public void updateController() {
 		AIMonster();
 		moveSpell();
@@ -130,7 +135,7 @@ public class Controller implements IController {
 
 	/*
 	 * Overrides the orderPerform Method in the implemented interface
-	 */ 
+	 */
 	public void orderPerform(ControllerOrder controllerOrder) throws IOException {
 		if (controllerOrder != null) {
 			if (lorann != null) {
@@ -174,7 +179,8 @@ public class Controller implements IController {
 			case RETRY:
 				if (this.model.getResurrections() <= 0) {
 					this.init();
-				} else {
+				} 
+				else {
 					DeadMonsters.clear();
 					model.loadMap(model.getMap().getID());
 					model.setMessage("");
@@ -194,7 +200,7 @@ public class Controller implements IController {
 
 	/*
 	 * Overrides the contactHero Method in the implemented interface
-	 */ 
+	 */
 	public synchronized boolean contactHero(int x, int y) {
 		if (model.getMap().getElement(x, y) != null) {
 			if ((model.getMap().getElement(x, y).getPermeability()) == Permeability.PENETRABLE) {
@@ -260,26 +266,18 @@ public class Controller implements IController {
 
 	}
 
-	/*
-	 * Overrides the contactMonster Method in the implemented interface
-	 */ 
-	public synchronized boolean contactMonster(int x, int y, IMobileElement monster) {
-		int notInContact = 0;
-		if (model.getMap().getElement(x, y) == null && lorann != null) {
-			if (lorann.getX() == x && lorann.getY() == y) {
-				gameOver();
-			}
 
-			else if (isSpell()) {
-				if (monster.getX() == spell.getX() && monster.getY() == spell.getY()) {
-					DeadMonsters.add(monster);
-					Sounds.EXPLOSION.play();
-					destroySpell();
-					model.setScore(model.getScore() + 500);
-				}
-			}
-			if (monster.getX() != x || monster.getY() != y) {
-				notInContact = 1;
+
+	public synchronized boolean contactMonster(int x, int y, IMobileElement monster) {
+		if (lorann.getX() == x && lorann.getY() == y) { // If contact with the hero.
+			gameOver();
+		} 
+		else if (isSpell()) {
+			if (monster.getX() == spell.getX() && monster.getY() == spell.getY()) {
+				DeadMonsters.add(monster);
+				Sounds.EXPLOSION.play();
+				destroySpell();
+				model.setScore(model.getScore() + 100);
 			}
 		}
 		for (IMobileElement otherMonster : model.getMap().getMobiles()) {
@@ -287,21 +285,43 @@ public class Controller implements IController {
 				return false;
 			}
 		}
-		if (notInContact == 1) {
-			return true;
-		}
-		return false;
+		return true;
 	}
-
 	/*
 	 * Overrides the AIMonster Method in the implemented interface
-	 */ 
+	 */
 	public synchronized void AIMonster() {
-
+		for (IMobileElement monster : model.getMap().getMobiles()) {
+			switch (monster.getDirection()) {
+			case DOWN:
+				if (contactMonster(monster.getX(), monster.getY() + 1, monster)) {
+					monster.moveDown();
+				}
+				break;
+			case UP:
+				if (contactMonster(monster.getX(), monster.getY() - 1, monster)) {
+					monster.moveUp();
+				}
+				break;
+			case LEFT:
+				if (contactMonster(monster.getX() - 1, monster.getY(), monster)) {
+					monster.moveLeft();
+				}
+				break;
+			case RIGHT:
+				if (contactMonster(monster.getX() + 1, monster.getY() + 1, monster)) {
+					monster.moveRight();
+				}
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	/**
 	 * Gets the view
+	 * 
 	 * @return IView
 	 */
 	public IView getView() {
@@ -321,6 +341,7 @@ public class Controller implements IController {
 
 	/**
 	 * Verifies if no spell is created
+	 * 
 	 * @return boolean
 	 */
 	public boolean isSpell() {
@@ -374,6 +395,7 @@ public class Controller implements IController {
 
 	/**
 	 * Verifies if there is no element blocking the spell from being created
+	 * 
 	 * @return boolean
 	 */
 	public boolean canCastSpell(ControllerOrder direction) {

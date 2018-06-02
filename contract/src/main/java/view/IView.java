@@ -1,4 +1,6 @@
-package contract;
+package view;
+
+import contract.ControllerOrder;
 
 /**
  * The Interface IView.

@@ -13,9 +13,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import contract.ControllerOrder;
-import contract.IController;
-import contract.IModel;
-import contract.IView;
+import controller.IController;
+import model.IModel;
 
 /**
  * @author DELL

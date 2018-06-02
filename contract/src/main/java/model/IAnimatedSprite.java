@@ -1,4 +1,4 @@
-package contract;
+package model;
 
 /**
  * @author DELL

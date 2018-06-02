@@ -1,9 +1,8 @@
 
 package controller;
 
-import contract.IController;
-import contract.IModel;
-import contract.IView;
+import model.IModel;
+import view.IView;
 
 /**
  * @author DELL

@@ -1,7 +1,7 @@
 package model.Element;
 
-import contract.IAnimatedSprite;
-import contract.ISprite;
+import model.IAnimatedSprite;
+import model.ISprite;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
