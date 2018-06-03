@@ -1,44 +1,106 @@
 package model;
 
-import java.sql.SQLException;
-import java.util.List;
+import java.io.IOException;
+import java.util.Observer;
 
-/**
- * <h1>The Interface IModel.</h1>
- *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
- * @version 1.0
- */
 public interface IModel {
 
-    /**
-     * Gets the example by id.
-     *
-     * @param id
-     *            the id
-     * @return the example by id
-     * @throws SQLException
-     *             the SQL exception
-     */
-    Example getExampleById(int id) throws SQLException;
+	/**
+	 * Gets the map.
+	 *
+	 * @return the map
+	 */
+	IMap getMap();
 
-    /**
-     * Gets the example by name.
-     *
-     * @param name
-     *            the name
-     * @return the example by name
-     * @throws SQLException
-     *             the SQL exception
-     */
-    Example getExampleByName(String name) throws SQLException;
+	/**
+	 * Load the map.
+	 *
+	 * @param ID the key
+	 */
+	void loadMap(int ID);
 
-    /**
-     * Gets the all examples.
-     *
-     * @return the all examples
-     * @throws SQLException
-     *             the SQL exception
-     */
-    List<Example> getAllExamples() throws SQLException;
+
+	/**
+	 * notify the changes to the view
+	 */
+	void flush();
+
+
+	/**
+	 * sets the message
+	 *
+	 * @param message
+	 * 				the message to set
+	 */
+	void setMessage(String message);
+
+
+	/**
+	 * get the message
+	 *
+	 * @return message
+	 */
+	String getMessage();
+
+
+	/**
+	 * calls the instantiation of  a spell
+	 *
+	 * @param path      path of the spell image
+	 * @param direction direction that the spell will go
+	 * @throws IOException
+	 * 			Can't read the file
+	 */
+	void createSpell(String path) throws IOException;
+
+	/**
+	 * Sets the door.
+	 *
+	 * @param element
+	 * 		The element.
+	 *
+	 */
+	
+	/**
+	 * The closed door becomes open
+	 * @return void
+	 */
+	void setOpenDoor(IElement element);
+
+	/**
+	 * Test the element type
+	 * @return int
+	 */
+	int testType(IElement element);
+	
+	/**
+	 * Adds an observer
+	 * @return void
+	 */
+	public void addObserver(Observer o);
+
+	/**
+	 * Sets the number of lives
+	 * @return void
+	 */
+	void setResurrections(int resurrections);
+	
+	/**
+	 * Gets the number of lives
+	 * @return int
+	 */
+	int getResurrections();
+
+	/**
+	 * Sets the score
+	 * @return void
+	 */
+	void setScore(int i);
+	
+	/**
+	 * Gets the score
+	 * @return int
+	 */
+	int getScore();
+
 }

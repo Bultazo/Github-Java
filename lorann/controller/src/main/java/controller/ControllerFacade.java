@@ -1,75 +1,53 @@
+
 package controller;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import model.Example;
 import model.IModel;
 import view.IView;
 
 /**
- * <h1>The Class ControllerFacade provides a facade of the Controller component.</h1>
+ * @author DELL
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
- * @version 1.0
  */
-public class ControllerFacade implements IController {
+public class ControllerFacade {
 
-    /** The view. */
-    private final IView  view;
+	/**
+	 * The controller
+	 */
+	private IController controller;
 
-    /** The model. */
-    private final IModel model;
 
-    /**
-     * Instantiates a new controller facade.
-     *
-     * @param view
-     *            the view
-     * @param model
-     *            the model
-     */
-    public ControllerFacade(final IView view, final IModel model) {
-        super();
-        this.view = view;
-        this.model = model;
-    }
+	/**
+	 * The main constructor 
+	 * @param view
+	 * @param model
+	 */
+	public ControllerFacade(IView view, IModel model) {
+		this.controller = new Controller(view, model);
+		this.start();
+	}
 
-    /**
-     * Start.
-     *
-     * @throws SQLException
-     *             the SQL exception
-     */
-    public void start() throws SQLException {
-        this.getView().displayMessage(this.getModel().getExampleById(1).toString());
+	/**
+	 * The controller's start method
+	 * 
+	 */
+	public void start() {
+		this.controller.start();
+	}
 
-        this.getView().displayMessage(this.getModel().getExampleByName("Example 2").toString());
+	/**
+	 * The controller's updateController method
+	 * 
+	 */
+	public synchronized void updateController() {
+		this.controller.updateController();
+	}
 
-        final List<Example> examples = this.getModel().getAllExamples();
-        final StringBuilder message = new StringBuilder();
-        for (final Example example : examples) {
-            message.append(example);
-            message.append('\n');
-        }
-        this.getView().displayMessage(message.toString());
-    }
+	/**
+	 * The controller's updateSprite method
+	 * 
+	 */
+	public void updateSprite() {
+		this.controller.updateSprite();
+	}
 
-    /**
-     * Gets the view.
-     *
-     * @return the view
-     */
-    public IView getView() {
-        return this.view;
-    }
-
-    /**
-     * Gets the model.
-     *
-     * @return the model
-     */
-    public IModel getModel() {
-        return this.model;
-    }
 }

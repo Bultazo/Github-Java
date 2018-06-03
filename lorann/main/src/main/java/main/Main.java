@@ -1,33 +1,27 @@
-package main;
+ package main;
 
 import java.sql.SQLException;
 
+import controller.Controller;
 import controller.ControllerFacade;
-import model.ModelFacade;
-import view.ViewFacade;
+import model.*;
+import view.*;
+
 
 /**
  * <h1>The Class Main.</h1>
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author DELL
  * @version 1.0
  */
 public abstract class Main {
 
-    /**
-     * The main method.
-     *
-     * @param args
-     *            the arguments
-     */
-    public static void main(final String[] args) {
-        final ControllerFacade controller = new ControllerFacade(new ViewFacade(), new ModelFacade());
+    public static void main(final String[] args) throws SQLException {
+		
+    	ModelFacade model = new ModelFacade(); //On instancie un modèle
+		ViewFacade view = new ViewFacade(model); //On lie la vue et le modèle
+		ControllerFacade controller = new ControllerFacade(view, model);
 
-        try {
-            controller.start();
-        } catch (final SQLException exception) {
-            exception.printStackTrace();
-        }
     }
 
 }

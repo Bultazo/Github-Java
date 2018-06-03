@@ -21,12 +21,17 @@
      </plugins>
   </build>
   <modules>
-    <module>contract</module>
-    <module>controller</module>
-    <module>model</module>
-    <module>view</module>
-    <module>main</module>
     
+    
+    
+    
+    
+
+    <module>../controller</module>
+    <module>../main</module>
+    <module>../model</module>
+    <module>../view</module>
+    <module>../contract</module>
   </modules>
   <reporting>
     <plugins>

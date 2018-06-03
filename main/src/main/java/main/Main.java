@@ -1,4 +1,4 @@
-package main;
+ package main;
 
 import java.sql.SQLException;
 
@@ -21,6 +21,7 @@ public abstract class Main {
     	ModelFacade model = new ModelFacade(); //On instancie un modèle
 		ViewFacade view = new ViewFacade(model); //On lie la vue et le modèle
 		ControllerFacade controller = new ControllerFacade(view, model);
+		//hello ma gueule
 
     }
 
