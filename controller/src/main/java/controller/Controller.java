@@ -23,6 +23,7 @@ public class Controller implements IController {
 	 * The model
 	 */
 	private IModel model;
+	
 	/**
 	 * The clock
 	 */
@@ -58,8 +59,11 @@ public class Controller implements IController {
 	 */
 	private int scoreLevel;
 
+	
 	/**
-	 * The main constructor
+	 * The main constructor 
+	 * @param view
+	 * @param model
 	 */
 	public Controller(final IView view, final IModel model) {
 		this.view = view;
@@ -81,13 +85,14 @@ public class Controller implements IController {
 	}
 
 	/**
-	 * Initialize all the needed variables to fresh
+	 * Initialize all the needed variables to start a new game
 	 * 
 	 */
 	public void init() {
-		this.model.loadMap(7); // On charge la première map
+		this.model.loadMap(1); // On charge la première map
 		this.model.setResurrections(11);
 		this.model.setScore(0);
+		this.destroySpell();
 		this.lorann = model.getMap().getHero();
 		this.DeadMonsters = new ArrayList<IMobileElement>();
 		this.scoreLevel = model.getScore();
@@ -140,6 +145,7 @@ public class Controller implements IController {
 
 	/*
 	 * Overrides the orderPerform Method in the implemented interface
+	 * @param controllerOrder
 	 */
 	public void orderPerform(ControllerOrder controllerOrder) throws IOException {
 		if (controllerOrder != null) {
@@ -167,6 +173,30 @@ public class Controller implements IController {
 					lorann.setDirection(controllerOrder);
 					if (contactHero(lorann.getX() + 1, lorann.getY())) {
 						lorann.moveRight();
+					}
+					break;
+				case UPRIGHT:
+					lorann.setDirection(controllerOrder);
+					if (contactHero(lorann.getX() +1, lorann.getY() - 1)) {
+						lorann.moveUpRight();
+					}
+					break;
+				case DOWNRIGHT:
+					lorann.setDirection(controllerOrder);
+					if (contactHero(lorann.getX() +1, lorann.getY() + 1)) {
+						lorann.moveDownRight();
+					}
+					break;
+				case UPLEFT:
+					lorann.setDirection(controllerOrder);
+					if (contactHero(lorann.getX() - 1, lorann.getY() - 1)) {
+						lorann.moveUpLeft();
+					}
+					break;
+				case DOWNLEFT:
+					lorann.setDirection(controllerOrder);
+					if (contactHero(lorann.getX() - 1, lorann.getY() + 1)) {
+						lorann.moveDownLeft();
 					}
 					break;
 				case SPACE:
@@ -204,9 +234,13 @@ public class Controller implements IController {
 		}
 	}
 
+
 	/*
 	 * Overrides the contactHero Method in the implemented interface
-	 */
+	 * @param x
+	 * @param y
+	 * @return
+	 */ 
 	public synchronized boolean contactHero(int x, int y) {
 		if (model.getMap().getElement(x, y) != null) {
 			if ((model.getMap().getElement(x, y).getPermeability()) == Permeability.PENETRABLE) {
@@ -227,8 +261,10 @@ public class Controller implements IController {
 						model.setOpenDoor(model.getMap().getDoor());
 					}
 				} else if (model.getMap().getElement(x, y).getStateElement() == StateElement.DOOR) {
-
+					Sounds.DOOROPEN.play();
 					this.scoreLevel = model.getScore();
+					destroySpell();
+					
 					if (model.getMap().getID() < 5) {
 						model.loadMap(model.getMap().getID() + 1);
 						lorann = model.getMap().getHero();
@@ -272,6 +308,13 @@ public class Controller implements IController {
 
 	}
 
+	/*
+	 * Overrides the contactMonster Method in the implemented interface
+	 * @param x
+	 * @param y
+	 * @param monster
+	 * @return
+	 */ 
 	public synchronized boolean contactMonster(int x, int y, IMobileElement monster) {
 		if (model.getMap().getElement(x, y) == null) {
 			if (lorann.getX() == x && lorann.getY() == y) { // If there will be a contact with the hero.
@@ -289,8 +332,7 @@ public class Controller implements IController {
 			}
 			for (IMobileElement otherMonster : model.getMap().getMobiles()) {
 				if (otherMonster.getX() == x && otherMonster.getY() == y) { // If there will be a contact with other
-																			// monsters
-					return false;
+					return false;	// monsters
 				}
 			}
 		} else {
@@ -299,17 +341,16 @@ public class Controller implements IController {
 		return true;
 	}
 
+
 	/*
 	 * Overrides the AIMonster Method in the implemented interface
-	 */
+	 */ 
 	public synchronized void AIMonster() {
 
 		for (IMobileElement monster : model.getMap().getMobiles()) {
 			if (lorann != null && model.getMap().getHero() != null) {
 				if (Math.abs(lorann.getX() - monster.getX()) <= 4 && Math.abs(lorann.getX() - monster.getX()) <= 4) {
-					monster.setStateElement(StateElement.MONSTER);
-				}
-				if (monster.getStateElement() == StateElement.MONSTER) {
+
 					if (lorann.getY() > monster.getY()) {
 						if (contactMonster(monster.getX(), monster.getY() + 1, monster)) {
 							monster.moveDown();
@@ -330,36 +371,35 @@ public class Controller implements IController {
 							}
 						}
 					}
-				}
 
-				else {
+				} else {
 					switch (monster.getDirection()) {
 					case DOWN:
+						this.monsterCountX = 0;
 						if (contactMonster(monster.getX(), monster.getY() + 1, monster)) {
 							monster.moveDown();
-							this.monsterCountX = 0;
 						} else if (monsterCountY > 1) {
-							monster.setDirection(ControllerOrder.RIGHT);
+							monster.setDirection(ControllerOrder.LEFT);
 						} else {
 							monster.setDirection(ControllerOrder.UP);
 							this.monsterCountY++;
 						}
 						break;
 					case UP:
+						this.monsterCountX = 0;
 						if (contactMonster(monster.getX(), monster.getY() - 1, monster)) {
 							monster.moveUp();
-							this.monsterCountX = 0;
 						} else if (monsterCountY > 1) {
-							monster.setDirection(ControllerOrder.RIGHT);
+							monster.setDirection(ControllerOrder.LEFT);
 						} else {
 							monster.setDirection(ControllerOrder.DOWN);
 							this.monsterCountY++;
 						}
 						break;
 					case LEFT:
+						this.monsterCountY = 0;
 						if (contactMonster(monster.getX() - 1, monster.getY(), monster)) {
 							monster.moveLeft();
-							this.monsterCountY = 0;
 						} else if (monsterCountX > 1) {
 							monster.setDirection(ControllerOrder.UP);
 						} else {
@@ -368,9 +408,9 @@ public class Controller implements IController {
 						}
 						break;
 					case RIGHT:
+						this.monsterCountY = 0;
 						if (contactMonster(monster.getX() + 1, monster.getY(), monster)) {
 							monster.moveRight();
-							this.monsterCountY = 0;
 						} else if (monsterCountX > 1) {
 							monster.setDirection(ControllerOrder.UP);
 						} else {
@@ -427,7 +467,6 @@ public class Controller implements IController {
 	public synchronized void moveSpell() {
 
 		if (isSpell()) {
-			System.out.println(spell.getDirection());
 			if (lorann != null) {
 				int xHero = lorann.getX();
 				int xSpell = spell.getX();
@@ -507,7 +546,7 @@ public class Controller implements IController {
 
 	/**
 	 * Destroys the monster
-	 * 
+	 * @param monster
 	 */
 	public synchronized void destroyMonster(IMobileElement monster) {
 		model.getMap().getMobiles().remove(monster);

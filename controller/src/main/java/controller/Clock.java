@@ -7,6 +7,10 @@ import java.io.IOException;
  *
  */
 
+/**
+ * @author DELL
+ *
+ */
 public class Clock extends Thread implements IClock {
 
 	/**
@@ -23,15 +27,17 @@ public class Clock extends Thread implements IClock {
 	private int time = 120;
 
 	/**
-	 * The main constructor 
+	 * The main constructor
+	 * 
+	 * @param controller
 	 */
 	public Clock(Controller controller) {
 		this.controller = controller;
 	}
 
 	/*
-	 * Overrides the run Method in 
-	 */ 
+	 * This updates the controller's Monster AI and the spell movements
+	 */
 	public synchronized void run() {
 		while (!stopped) {
 			controller.updateController();
@@ -44,16 +50,21 @@ public class Clock extends Thread implements IClock {
 		}
 
 	}
+
 	/*
-	 * Overrides the isStopped Method 
-	 */ 
+	 * Overrides the isStopped Method in the implemented interface
+	 * 
+	 * @return
+	 */
 	public boolean isStopped() {
 		return stopped;
 	}
 
 	/*
-	 * Overrides the setStopped Method 
-	 */ 
+	 * Overrides the setStopped Method in the implemented interface
+	 * 
+	 * @param stopped
+	 */
 	public void setStopped(boolean stopped) {
 		this.stopped = stopped;
 	}

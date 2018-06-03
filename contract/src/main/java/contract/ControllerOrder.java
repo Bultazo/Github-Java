@@ -26,7 +26,19 @@ public enum ControllerOrder {
 	SPACE,
 
 	/** Restart the level*/
-	RETRY;
+	RETRY,
+	
+	/** The hero goes UPRIGHT */
+	UPRIGHT,
+	
+	/** The hero goes UPLEFT */
+	UPLEFT,
+	
+	/** The hero goes DOWNRIGHT*/
+	DOWNRIGHT,
+
+	/** The hero goes DOWNLEFT */
+	DOWNLEFT;
 	
 	
 }

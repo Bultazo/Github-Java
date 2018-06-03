@@ -75,25 +75,45 @@ public interface IMobileElement {
 
     /**
      * Moves Left
-     * @return void
+     *
      */
     public void moveLeft();
     
     /**
      * Moves Right
-     * @return void
+     *
      */
     public void moveRight();
     
     /**
      * Moves Up
-     * @return void
+     * 
      */
     public void moveUp();
     
     /**
      * Moves Down
-     * @return void
+     *
      */
     public void moveDown();
+    
+	/**
+	 * Moves DownLeft
+	 */
+	public void moveDownLeft();
+	
+	/**
+	 * Moves DownRight
+	 */
+	public void moveDownRight();
+	
+	/**
+	 * Moves UpLeft
+	 */
+	public void moveUpLeft();
+	
+	/**
+	 * Moves UpRight
+	 */
+	public void moveUpRight();
 }

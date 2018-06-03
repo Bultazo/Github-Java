@@ -23,7 +23,7 @@ public class ClockLorann extends Thread implements IClock {
 	/**
 	 * The time
 	 */
-	private int time = 60;
+	private int time = 80;
 
 	/**
 	 * The main constructor

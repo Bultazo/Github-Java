@@ -44,7 +44,7 @@ public enum Sounds {
 	/**
 	 * The YOUWIN1
 	 */
-	YOUWIN1("Sounds/YouWin1.wav"),
+	DOOROPEN("Sounds/DoorOpen.wav"),
 	/**
 	 * The YOUWIN2
 	 */

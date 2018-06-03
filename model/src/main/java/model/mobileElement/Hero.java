@@ -73,6 +73,46 @@ public class Hero extends MobileElement implements IAnimatedSprite {
 		this.setImage(sprites.getImages()[0]);
 		model.flush();
 	}
+	
+	
+	
+	public void moveDownLeft() {
+		model.getMap().getHero().setY(model.getMap().getHero().getY() + 1);
+		model.getMap().getHero().setX(model.getMap().getHero().getX() - 1);
+		this.setImage(sprites.getImages()[1]);
+		model.flush();
+	}
+	
+	/*
+	 * Overrides the moveRight Method in the implemented interface
+	 */ 
+	public void moveDownRight() {
+		model.getMap().getHero().setY(model.getMap().getHero().getY() + 1);
+		model.getMap().getHero().setX(model.getMap().getHero().getX() + 1);
+		this.setImage(sprites.getImages()[7]);
+		model.flush();
+		
+	}
+	
+	/*
+	 * Overrides the moveUp Method in the implemented interface
+	 */ 
+	public void moveUpLeft() {
+		model.getMap().getHero().setY(model.getMap().getHero().getY() - 1);
+		model.getMap().getHero().setX(model.getMap().getHero().getX() - 1);
+		this.setImage(sprites.getImages()[3]);
+		model.flush();
+	}
+	
+	/*
+	 * Overrides the moveDown Method in the implemented interface
+	 */ 
+	public void moveUpRight() {
+		model.getMap().getHero().setY(model.getMap().getHero().getY() - 1);
+		model.getMap().getHero().setX(model.getMap().getHero().getX() + 1);
+		this.setImage(sprites.getImages()[5]);
+		model.flush();
+	}
 	/*
 	 * Overrides the next Method in the implemented interface
 	 */ 

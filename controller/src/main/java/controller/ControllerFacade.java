@@ -15,8 +15,11 @@ public class ControllerFacade {
 	 */
 	private IController controller;
 
+
 	/**
 	 * The main constructor 
+	 * @param view
+	 * @param model
 	 */
 	public ControllerFacade(IView view, IModel model) {
 		this.controller = new Controller(view, model);

@@ -12,7 +12,6 @@ import contract.ControllerOrder;
 import controller.IController;
 import model.IModel;
 
-
 /**
  * @author DELL
  *
@@ -29,7 +28,7 @@ public class Frame extends JFrame {
 	private IModel model;
 
 	/**
-	 * The main constructor 
+	 * The main constructor
 	 */
 	public Frame(final IModel model) throws HeadlessException {
 		this.model = model;
@@ -54,32 +53,40 @@ public class Frame extends JFrame {
 
 	/**
 	 * Converts the KeyCode of the keyListener to an order
+	 * 
 	 * @return ControllerOrder
 	 */
 	static ControllerOrder keyCodeToControllerOrder(final KeyEvent e) {
 		switch (e.getKeyCode()) {
-		case KeyEvent.VK_UP:
 		case KeyEvent.VK_Z:
+		case KeyEvent.VK_8:
 			return ControllerOrder.UP;
-		case KeyEvent.VK_DOWN:
 		case KeyEvent.VK_S:
 			return ControllerOrder.DOWN;
-		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_Q:
 			return ControllerOrder.LEFT;
-		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_D:
 			return ControllerOrder.RIGHT;
 		case KeyEvent.VK_SPACE:
 			return ControllerOrder.SPACE;
 		case KeyEvent.VK_R:
 			return ControllerOrder.RETRY;
+		case KeyEvent.VK_A:
+			return ControllerOrder.UPLEFT;
+		case KeyEvent.VK_E:
+			return ControllerOrder.UPRIGHT;
+		case KeyEvent.VK_W:
+			return ControllerOrder.DOWNLEFT;
+		case KeyEvent.VK_C:
+			return ControllerOrder.DOWNRIGHT;
+
 		}
 		return null;
 	}
 
 	/**
 	 * Gets the Model
+	 * 
 	 * @return IModel
 	 */
 	IModel getModel() {

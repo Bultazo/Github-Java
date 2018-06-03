@@ -174,4 +174,44 @@ public class MobileElement extends Element implements IMobileElement{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	/*
+	 * Overrides the moveDownLeft Method in the implemented interface
+	 */ 
+	@Override
+	public void moveDownLeft() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	/*
+	 * Overrides the moveDownRight Method in the implemented interface
+	 */ 
+	@Override
+	public void moveDownRight() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	/*
+	 * Overrides the moveUpLeft Method in the implemented interface
+	 */ 
+	@Override
+	public void moveUpLeft() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	/*
+	 * Overrides the moveUpRight Method in the implemented interface
+	 */ 
+	@Override
+	public void moveUpRight() {
+		// TODO Auto-generated method stub
+		
+	}
 }
