@@ -8,11 +8,7 @@ import java.net.URL;
 import javax.sound.sampled.*;
 
 /**
- * @author DELL
- *
- */
-/**
- * @author DELL
+ * @author Beau Gosse Sahbi
  *
  */
 public enum Sounds {

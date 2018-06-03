@@ -42,6 +42,8 @@ public interface IController {
 	/**
 	 * Gets the order from the view
 	 * 
+	 * @param controllerOrder
+	 * @throws IOException
 	 */
 	void orderPerform(ControllerOrder controllerOrder) throws IOException;
 	

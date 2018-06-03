@@ -1,7 +1,7 @@
 package contract;
 
 /**
- * 
+ * <h1>The class controller order.</h1>
  * @author DELL
  *
  */
@@ -22,12 +22,6 @@ public enum ControllerOrder {
 	/** The hero is standing still */
 	NOP,
 	
-	/** The hero throws a spell*/
-	SPACE,
-
-	/** Restart the level*/
-	RETRY,
-	
 	/** The hero goes UPRIGHT */
 	UPRIGHT,
 	
@@ -38,7 +32,12 @@ public enum ControllerOrder {
 	DOWNRIGHT,
 
 	/** The hero goes DOWNLEFT */
-	DOWNLEFT;
+	DOWNLEFT,
 	
+	/** The hero throws a spell*/
+	SPACE,
+
+	/** Restart the level*/
+	RETRY;
 	
 }
