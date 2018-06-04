@@ -32,7 +32,7 @@ public class Controller implements IController {
 	 * The move
 	 */
 	private ClockLorann move;
-	
+
 	/**
 	 * The list of monsters to be killed
 	 */
@@ -384,42 +384,49 @@ public class Controller implements IController {
 					case DOWN:
 						if (contactMonster(monster.getX(), monster.getY() + 1, monster)) {
 							monster.moveDown();
-							
-						} else if (!contactMonster(monster.getX(), monster.getY() - 1, monster)) {
-							monster.moveRight();
-							
+
 						} else {
-							monster.moveUp();
+							if (!contactMonster(monster.getX(), monster.getY() - 1, monster)) {
+								monster.setDirection(ControllerOrder.RIGHT);
+
+							} else {
+								monster.moveUp();
+							}
 						}
 						break;
 					case UP:
 						if (contactMonster(monster.getX(), monster.getY() - 1, monster)) {
 							monster.moveUp();
-							
-						} else if (!contactMonster(monster.getX(), monster.getY() + 1, monster)) {
-							monster.moveLeft();
 						} else {
-							monster.moveDown();
+							if (!contactMonster(monster.getX(), monster.getY() + 1, monster)) {
+								monster.setDirection(ControllerOrder.LEFT);
+							} else {
+								monster.moveDown();
+							}
 						}
 						break;
 					case LEFT:
 						if (contactMonster(monster.getX() - 1, monster.getY(), monster)) {
 							monster.moveLeft();
-							
-						} else if (!contactMonster(monster.getX() +1, monster.getY(), monster)) {
-							monster.moveDown();
+
 						} else {
-							monster.moveRight();
+							if (!contactMonster(monster.getX() + 1, monster.getY(), monster)) {
+								monster.setDirection(ControllerOrder.DOWN);
+							} else {
+								monster.moveRight();
+							}
 						}
 						break;
 					case RIGHT:
 						if (contactMonster(monster.getX() + 1, monster.getY(), monster)) {
 							monster.moveRight();
-							
-						} else if (!contactMonster(monster.getX() -1, monster.getY(), monster)) {
-							monster.moveUp();
+
 						} else {
-							monster.moveLeft();
+							if (!contactMonster(monster.getX() - 1, monster.getY(), monster)) {
+								monster.setDirection(ControllerOrder.UP);
+							} else {
+								monster.moveLeft();
+							}
 						}
 						break;
 					default:
