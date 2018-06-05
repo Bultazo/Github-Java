@@ -16,14 +16,12 @@ import model.Example;
  */
 public abstract class ExampleDAO extends AbstractDAO {
 
-	/** The sql example by id. */
+	/** The sql element by id. */
 	private static String sqlExampleById = "{call GetElementById(?)}";
 
-	/** The sql example by name. */
+	/** The sql element by name. */
 	private static String sqlExampleByName = "{call GetElementByName(?)}";
 
-	/** The sql all examples. */
-	private static String sqlAllExamples = "{call GetAllExamples()}";
 
 	/** The id column index. */
 	private static int idColumnIndex = 1;
@@ -32,11 +30,11 @@ public abstract class ExampleDAO extends AbstractDAO {
 	private static int nameColumnIndex = 2;
 
 	/**
-	 * Gets the example by id.
+	 * Gets the element by id.
 	 *
 	 * @param id
 	 *            the id
-	 * @return the example by id
+	 * @return the element by id
 	 * @throws SQLException
 	 *             the SQL exception
 	 */
@@ -51,11 +49,11 @@ public abstract class ExampleDAO extends AbstractDAO {
 	}
 
 	/**
-	 * Gets the example by name.
+	 * Gets the element by name.
 	 *
 	 * @param name
 	 *            the name
-	 * @return the example by name
+	 * @return the element by name
 	 * @throws SQLException
 	 *             the SQL exception
 	 */
@@ -65,23 +63,6 @@ public abstract class ExampleDAO extends AbstractDAO {
 		if (callStatement.execute()) {
 			final ResultSet result = callStatement.getResultSet();
 			return result;
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the all examples.
-	 *
-	 * @return the all examples
-	 * @throws SQLException
-	 *             the SQL exception
-	 */
-	public static ResultSet getAllElements() throws SQLException {
-		final CallableStatement callStatement = prepareCall(sqlAllExamples);
-		if (callStatement.execute()) {
-			final ResultSet result = callStatement.getResultSet();
-			result.close();
-			
 		}
 		return null;
 	}

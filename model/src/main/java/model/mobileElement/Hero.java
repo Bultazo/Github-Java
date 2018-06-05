@@ -2,7 +2,8 @@ package model.mobileElement;
 
 import contract.*;
 import model.IAnimatedSprite;
-import model.IModel;
+
+import model.Model;
 import model.Element.*;
 
 import javax.imageio.ImageIO;
@@ -18,14 +19,14 @@ public class Hero extends MobileElement implements IAnimatedSprite {
 	/**
 	 * The sprites
 	 */
-	private AnimatedSprite sprites;
+	AnimatedSprite sprites;
 
 	/**
 	 * The main constructor 
 	 * @throws IOException
      * 		Can't read file
 	 */
-	public Hero(IModel model) throws IOException {
+	public Hero(Model model) throws IOException {
 
 		super(new Sprite(ImageIO.read(new File("sprite/lorann_r.png"))), Permeability.BLOCKING, StateElement.NOP);
 		this.model = model;

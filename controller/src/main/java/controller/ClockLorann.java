@@ -45,13 +45,12 @@ public class ClockLorann extends Thread implements IClock {
 	public synchronized void run() {
 		while (true) {
 			if (controller.getView().isMoving()) {
-				try {
-					controller.orderPerform(controller.getView().getOrder());
-			
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+					try {
+						controller.orderPerform(controller.getView().getOrder());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			}
 			if (!stopped) {
 				try {

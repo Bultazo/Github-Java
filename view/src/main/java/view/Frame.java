@@ -59,13 +59,16 @@ public class Frame extends JFrame {
 	static ControllerOrder keyCodeToControllerOrder(final KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_Z:
-		case KeyEvent.VK_8:
+		case KeyEvent.VK_UP:
 			return ControllerOrder.UP;
 		case KeyEvent.VK_S:
+		case KeyEvent.VK_DOWN:
 			return ControllerOrder.DOWN;
 		case KeyEvent.VK_Q:
+		case KeyEvent.VK_LEFT:
 			return ControllerOrder.LEFT;
 		case KeyEvent.VK_D:
+		case KeyEvent.VK_RIGHT:
 			return ControllerOrder.RIGHT;
 		case KeyEvent.VK_SPACE:
 			return ControllerOrder.SPACE;
@@ -79,7 +82,6 @@ public class Frame extends JFrame {
 			return ControllerOrder.DOWNLEFT;
 		case KeyEvent.VK_C:
 			return ControllerOrder.DOWNRIGHT;
-
 		}
 		return null;
 	}

@@ -3,10 +3,9 @@ package model;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Observer;
 
-import contract.ControllerOrder;
+import model.Element.Map;
 import model.dao.ExampleDAO;
 
 
@@ -30,7 +29,7 @@ public final class ModelFacade implements IModel{
     
     // All the model methods
     
-    public IMap getMap() {
+    public Map getMap() {
     	return this.model.getMap();
     }
 
@@ -68,10 +67,6 @@ public final class ModelFacade implements IModel{
 		// TODO Auto-generated method stub
 		return ExampleDAO.getElementByName(name);
 
-	}
-	public ResultSet getAllElements() throws SQLException {
-		// TODO Auto-generated method stub
-		return ExampleDAO.getAllElements();
 	}
 	
 	// Getters and setters

@@ -47,6 +47,7 @@ public class Model extends Observable implements IModel {
 
 	/**
 	 * Loads the map
+	 * @param ID
 	 */
 	public void loadMap(final int ID) {
 		map = new Map(20, 12);
@@ -72,6 +73,7 @@ public class Model extends Observable implements IModel {
 				switch (type) {
 				case ("BoneH"):
 					e = new BoneH();
+				System.out.println("BOOOOONE");
 					break;
 				case ("BoneC"):
 					e = new BoneC();
@@ -217,7 +219,7 @@ public class Model extends Observable implements IModel {
 		default:
 			break;
 		}
-		Sounds.SPELL.play();
+		
 	}
 	
 	/*
@@ -227,7 +229,7 @@ public class Model extends Observable implements IModel {
 		// TODO Auto-generated method stub
 		try {
 			element.setSprite(new Sprite(ImageIO.read(new File(
-					"C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/gate_open.png"))));
+					"sprite/gate_open.png"))));
 			element.setPermeability(Permeability.PENETRABLE);
 			element.setStateElement(StateElement.DOOR);
 		} catch (IOException e) {

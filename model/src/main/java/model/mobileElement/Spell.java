@@ -2,7 +2,8 @@ package model.mobileElement;
 
 import contract.*;
 import model.IAnimatedSprite;
-import model.IModel;
+
+import model.Model;
 import model.Element.*;
 import javax.imageio.ImageIO;
 import java.awt.Image;
@@ -26,7 +27,7 @@ public class Spell extends MobileElement implements IAnimatedSprite {
 	 * @throws IOException
      * 		Can't read file 
 	 */
-	public Spell(String path, IModel model) throws IOException {
+	public Spell(String path, Model model) throws IOException {
 		super((new Sprite(ImageIO.read(new File("sprite/fireball_1.png")))), Permeability.PENETRABLE,
 				StateElement.SPELL);
 		String Animation[] = { "fireball_1", "fireball_2", "fireball_3", "fireball_4", "fireball_5" };

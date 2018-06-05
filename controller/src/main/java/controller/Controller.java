@@ -455,6 +455,7 @@ public class Controller implements IController {
 	public void castSpell() throws IOException {
 		if (!isSpell()) {
 			model.createSpell("fireball");
+			Sounds.SPELL.play();
 			model.flush();
 		}
 	}

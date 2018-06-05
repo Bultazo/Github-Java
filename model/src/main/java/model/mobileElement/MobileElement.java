@@ -1,14 +1,12 @@
 package model.mobileElement;
 import model.IMobileElement;
-import model.IModel;
-import model.ISprite;
+
+import model.Model;
 import model.Element.*;
 import contract.*;
 
-/**
- * @author DELL
- *
- */
+
+
 /**
  * @author DELL
  *
@@ -28,7 +26,7 @@ public class MobileElement extends Element implements IMobileElement{
     /**
      * The sprite
      */
-    private ISprite sprite;
+    private Sprite sprite;
          
     /**
      * The permeability
@@ -48,7 +46,7 @@ public class MobileElement extends Element implements IMobileElement{
     /**
      * The model
      */
-    protected IModel model;
+    protected Model model;
 
     /**
      * The main constructor 

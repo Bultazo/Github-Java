@@ -3,7 +3,7 @@ package model.mobileElement;
 import contract.ControllerOrder;
 import contract.Permeability;
 import contract.StateElement;
-import model.IModel;
+import model.Model;
 import model.Element.*;
 
 import javax.imageio.ImageIO;
@@ -23,7 +23,7 @@ public class Monster extends MobileElement {
 	 * @throws IOException
 	 *             Can't read file
 	 */
-	public Monster(String path, IModel model) throws IOException {
+	public Monster(String path, Model model) throws IOException {
 		super((new Sprite(ImageIO.read(new File("sprite/" + path + ".png")))), Permeability.BLOCKING,
 				StateElement.NOP);
 		this.model = model;

@@ -21,5 +21,4 @@ public class BoneC extends MotionlessElement{
         super((new Sprite(ImageIO.read(new File("C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/bone.png")))), 
         		Permeability.BLOCKING,StateElement.FIXED);
     }
-
 }

@@ -63,7 +63,7 @@ public interface IModel {
 	
 	/**
 	 * The closed door becomes open
-	 * @return void
+	 * 
 	 */
 	void setOpenDoor(IElement element);
 
@@ -75,13 +75,13 @@ public interface IModel {
 	
 	/**
 	 * Adds an observer
-	 * @return void
+	 * 
 	 */
 	public void addObserver(Observer o);
 
 	/**
 	 * Sets the number of lives
-	 * @return void
+	 * 
 	 */
 	void setResurrections(int resurrections);
 	
@@ -93,7 +93,7 @@ public interface IModel {
 
 	/**
 	 * Sets the score
-	 * @return void
+	 * 
 	 */
 	void setScore(int i);
 	

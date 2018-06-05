@@ -1,8 +1,6 @@
 package model.Element;
 
 import model.IAnimatedSprite;
-import model.ISprite;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
@@ -38,7 +36,7 @@ public class AnimatedSprite extends Sprite implements IAnimatedSprite {
         this.images = new Image[images.length];
         for(int i = 0; i<images.length; i++){
             try {
-               this.images[i] = ImageIO.read(new File("C:/Users/DELL/eclipse-workspace/Lorann-master/Lorann-master/model/sprite/"+images[i]+".png"));
+               this.images[i] = ImageIO.read(new File("sprite/"+images[i]+".png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

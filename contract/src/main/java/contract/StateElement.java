@@ -1,25 +1,50 @@
 package contract;
 
+/**
+ * @author DELL
+ *
+ */
 public enum StateElement {
 
-    /** C'est un element "comestible" */
+
+    /**
+     * A COLLECTABLE
+     */
     COLLECTABLE,
 
-    /** C'est un element fixe du décor */
+
+    /**
+     * A FIXED ELEMENT 
+     */
     FIXED,
 
-    /** C'est une porte */
+
+    /**
+     * A DOOR
+     */
     DOOR,
 
-    /** C'est un dragon */
+
+    /**
+     * The DRAGON
+     */
     DRAGON,
 
-    /** C'est un sortilège. */
+
+    /**
+     * The SPELL
+     */
     SPELL,
 
-    /** C'est le Héros */
+
+    /**
+     * The HERO
+     */
     NOP,
     
-    /** C'est un Monstre, Boooh */
+
+    /**
+     * A MONSTER
+     */
     MONSTER,
 }
