@@ -14,7 +14,7 @@ import model.IAnimatedSprite;
 public class AnimatedSpriteMock extends SpriteMock implements IAnimatedSprite {
 	  
 	public AnimatedSpriteMock(Image image, String[] images) {
-	     //   super(image);
+	     	super(image);
 	        this.images = new Image[images.length];
 	        for(int i = 0; i<images.length; i++){
 	            try {

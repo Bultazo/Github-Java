@@ -16,8 +16,9 @@ import model.IMobileElement;
 import model.IModel;
 
 
+
 /**
- * @author DELL
+ * @author DELL & Samir 
  *
  */
 public class ModelMock extends Observable implements IModel {
@@ -52,16 +53,20 @@ public class ModelMock extends Observable implements IModel {
 	/**
 	 * Loads the map
 	 * @param ID
+	 * @throws IOException 
 	 */
-	public void loadMap(final int ID) {
-		map = new MapMock(20, 12);
-		map.setID(ID);
+	public void loadMapp(final int ID) throws IOException {
+
 		this.map=new MapMock(20,12);
-        map.setHero(new HeroMock());
+        try {
+			map.setHero(new HeroMock(this));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         map.setHeroPosition(5,5);
         map.setID(ID);
-        map.addElementToMap(new ElementMock(Permeability.PENETRABLE, StateElement.COLLECTABLE),10,10);
-        map.getMobiles().add(new MonsterMock());
+        map.getMobiles().add(new MonsterMock("monster_1", this));
 	}
 
 	/**
@@ -79,7 +84,10 @@ public class ModelMock extends Observable implements IModel {
 	 * Overrides the testType Method in the implemented interface
 	 */ 
 	public int testType(IElement element) {
-	
+		if (element instanceof DoorMock) {
+			return 2;
+		} 
+		return 0;
 	}
 	
 
@@ -87,37 +95,10 @@ public class ModelMock extends Observable implements IModel {
 	 * Overrides the createSpell Method in the implemented interface
 	 */ 
 	public void createSpell(String path) throws IOException {
-		IMobileElement spell = new Spell(path, this);
+		IMobileElement spell = new SpellMock(path, this);
 		IMobileElement lorann = map.getHero();
 		map.setSpell(spell);
 
-		switch (lorann.getDirection()) {
-		case UP:
-			map.getSpell().setY(lorann.getY() + 1);
-			map.getSpell().setX(lorann.getX());
-			map.getSpell().setDirection(ControllerOrder.DOWN);
-			break;
-
-		case DOWN:
-			map.getSpell().setY(lorann.getY() - 1);
-			map.getSpell().setX(lorann.getX());
-			map.getSpell().setDirection(ControllerOrder.UP);
-			break;
-
-		case RIGHT:
-			map.getSpell().setY(lorann.getY());
-			map.getSpell().setX(lorann.getX() - 1);
-			map.getSpell().setDirection(ControllerOrder.LEFT);
-			break;
-
-		case LEFT:
-			map.getSpell().setY(lorann.getY());
-			map.getSpell().setX(lorann.getX() + 1);
-			map.getSpell().setDirection(ControllerOrder.RIGHT);
-			break;
-		default:
-			break;
-		}
 		
 	}
 
@@ -199,5 +180,11 @@ public class ModelMock extends Observable implements IModel {
 	public int getScore() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void loadMap(int ID) {
+		// TODO Auto-generated method stub
+		
 	}
 }
