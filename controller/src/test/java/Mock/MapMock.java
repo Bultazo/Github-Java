@@ -11,7 +11,7 @@ import model.IMobileElement;
 /**
  * Created by Romain on 20/06/2016.
  */
-/*
+
 public class MapMock implements IMap{
     IElement[][] elements;
     IMobileElement spell;
@@ -81,4 +81,4 @@ public class MapMock implements IMap{
     public void setSpell(IMobileElement spell) {
         this.spell = spell;
     }
-*/
+

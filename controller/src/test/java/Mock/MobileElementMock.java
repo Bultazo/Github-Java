@@ -6,7 +6,7 @@ import model.IMobileElement;
 /**
  * Created by Romain on 20/06/2016.
  */
-/*
+
 public class MobileElementMock extends ElementMock implements IMobileElement {
     int y;
     int x;
@@ -53,4 +53,3 @@ public class MobileElementMock extends ElementMock implements IMobileElement {
         this.stateElement = stateElement;
     }
 }
-*/
