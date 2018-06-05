@@ -10,9 +10,7 @@ import javax.imageio.ImageIO;
 
 import model.IAnimatedSprite;
 
-/**
- * Created by Romain on 20/06/2016.
- */
+
 public class AnimatedSpriteMock extends SpriteMock implements IAnimatedSprite {
 	  
 	public AnimatedSpriteMock(Image image, String[] images) {

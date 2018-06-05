@@ -18,7 +18,6 @@ public class ViewMock {
 	 * Overrides the getOrder Method in the implemented interface
 	 * @return
 	 */ 
-
 	public ControllerOrder getOrder() {
 		// TODO Auto-generated method stub
 		return null;

@@ -8,9 +8,6 @@ import model.IElement;
 import model.IMap;
 import model.IMobileElement;
 
-/**
- * Created by Romain on 20/06/2016.
- */
 
 public class MapMock implements IMap{
     IElement[][] elements;

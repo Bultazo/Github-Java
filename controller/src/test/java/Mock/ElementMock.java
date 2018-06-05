@@ -5,9 +5,7 @@ import contract.StateElement;
 import model.IElement;
 import model.ISprite;
 
-/**
- * Created by Romain on 20/06/2016.
- */
+
 public class ElementMock implements IElement {
 
     ISprite sprite;

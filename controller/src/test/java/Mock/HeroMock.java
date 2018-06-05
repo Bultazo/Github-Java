@@ -9,16 +9,8 @@ import contract.Permeability;
 import contract.StateElement;
 import model.IHero;
 
-
-/**
- * Interface of the Hero.
- * Created by Romain on 20/06/2016.
- * @author Romain
-  
-
-  
-public class HeroMock extends MobileElementMock implements IHero{
-    AnimatedSpriteMock sprites;
+public class HeroMock extends MobileElementMock implements IHero {
+	AnimatedSpriteMock sprites;
 
 	public HeroMock(ModelMock model) throws IOException {
 
@@ -30,17 +22,16 @@ public class HeroMock extends MobileElementMock implements IHero{
 		sprites = new AnimatedSpriteMock((ImageIO.read(new File("sprite/lorann_u.png"))), Animation);
 	}
 
-    public void next() {
-        sprites.next();
-        setImage(sprites.getImage());
-    }
+	public void next() {
+		sprites.next();
+		setImage(sprites.getImage());
+	}
 
-    public Image getImage() {
-        return null;
-    }
+	public Image getImage() {
+		return null;
+	}
 
-    public void setImage(Image image) {
+	public void setImage(Image image) {
 
-    }
+	}
 }
-*/
