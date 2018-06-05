@@ -10,11 +10,18 @@ import javax.imageio.ImageIO;
 
 import model.IAnimatedSprite;
 
-
+/**
+ * Created by Romain on 20/06/2016.
+ */
 public class AnimatedSpriteMock extends SpriteMock implements IAnimatedSprite {
+	/**
+	 * 
+	 * @param image
+	 * @param images
+	 */
 	  
 	public AnimatedSpriteMock(Image image, String[] images) {
-	     	super(image);
+	     //   super(image);
 	        this.images = new Image[images.length];
 	        for(int i = 0; i<images.length; i++){
 	            try {
@@ -40,7 +47,11 @@ public class AnimatedSpriteMock extends SpriteMock implements IAnimatedSprite {
     public Image getImage() {
         return this.images[this.step];
     }
-
+/**
+ * @param image 
+ *        the image to set 
+ *        
+ */
     public void setImage(Image image) {
         this.images = images;
     }

@@ -2,37 +2,16 @@ package Mock;
 
 import java.awt.*;
 
-import model.ISprite;
 /**
- * @author Samir
- *
+ * Created by Romain on 20/06/2016.
  */
+public class SpriteMock {
 
-public class SpriteMock implements ISprite {
-
-	/**
-     * The image
-     */
-    private Image image;
-
-    /**
-     * The main constructor 
-     */
-    public SpriteMock(Image image) {
-        this.image = image;
-    }
-
-  
-    /*
-     * Overrides the getImage Method in the implemented interface
-     */ 
+    Image image;
     public Image getImage() {
         return image;
     }
 
-    /*
-     * Overrides the setImage Method in the implemented interface
-     */ 
     public void setImage(Image image) {
         this.image = image;
     }
