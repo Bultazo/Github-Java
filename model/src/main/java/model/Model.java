@@ -148,7 +148,11 @@ public class Model extends Observable implements IModel {
 
 		this.setMessage("");
 	}
-
+	
+	public void loadBlankMap() {
+		map = new Map(20, 12);
+		
+	}
 	/**
 	 * 
 	 * Accesses the database
