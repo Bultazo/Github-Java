@@ -7,16 +7,15 @@ public interface IMap {
      /**
      * Adds an element to the map
      * @param element, y, x
+     *         the element to map.
      * 
      */
     void addElementToMap(IElement element, int x, int y);
 
      /**
      * Sets the Element
-     * @param element 
-     *         the IElement 
-     * @param x, y
-     *        the int to set
+     * @param element, x, y
+     *        the element to set.
      *        
      */
     void setElement(int x, int y,IElement element);
@@ -30,7 +29,7 @@ public interface IMap {
      /**
      * Sets the ID of the level
      * @param ID
-     *       the int to set 
+     *       the ID to set.
      * 
      */
     void setID(int ID);
@@ -39,7 +38,7 @@ public interface IMap {
      * Gets the element
      * @return IElement
      * @param x, y
-     *        the int 
+     *        the element.
      */
     IElement getElement(int x, int y);
 
@@ -58,7 +57,7 @@ public interface IMap {
      /**
      * Sets the initial position of the hero 
      * @param x, y
-     *        the int to set
+     *        the hero position to set.
      * 
      */
     void setHeroPosition(int x, int y);
@@ -72,7 +71,7 @@ public interface IMap {
      /**
      * Sets the Hero in the level
      * @param hero
-     *        the IMobileElement to set 
+     *        the hero to set.
      * 
      */
     void setHero(IMobileElement hero);
@@ -86,7 +85,7 @@ public interface IMap {
      /**
      * Sets the Spell
      * @param spell 
-     *        the IMobileElement to set 
+     *        the spell to set. 
      *        
      */
     void setSpell(IMobileElement spell);
@@ -100,7 +99,7 @@ public interface IMap {
      /**
      * Sets the door
      * @param Door
-     *        the IElement to set 
+     *        the door to set. 
      *        
      */
     void setDoor(IElement Door);

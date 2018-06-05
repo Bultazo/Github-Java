@@ -57,7 +57,7 @@ public interface IModel {
 	 * Sets the door.
 	 *
 	 * @param element
-	 * 		The element.
+	 * 		The open door to set.
 	 *
 	 */
 	
@@ -69,18 +69,24 @@ public interface IModel {
 
 	/**
 	 * Test the element type
+	 * @param element 
 	 * @return int
+	 * 
 	 */
 	int testType(IElement element);
 	
 	/**
 	 * Adds an observer
+	 * @param o 
 	 * 
 	 */
 	public void addObserver(Observer o);
 
 	/**
 	 * Sets the number of lives
+	 * @param resurrections
+	 *       the Resurrections to set.
+	 *          
 	 * 
 	 */
 	void setResurrections(int resurrections);
@@ -93,7 +99,7 @@ public interface IModel {
 
 	/**
 	 * Sets the score
-	 * 
+	 * @param i
 	 */
 	void setScore(int i);
 	
