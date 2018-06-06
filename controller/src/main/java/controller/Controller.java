@@ -18,11 +18,11 @@ public class Controller implements IController {
 	/**
 	 * The view
 	 */
-	private IView view;
+	IView view;
 	/**
 	 * The model
 	 */
-	private IModel model;
+	IModel model;
 
 	/**
 	 * The clock
@@ -41,15 +41,15 @@ public class Controller implements IController {
 	/**
 	 * Lorann
 	 */
-	private IMobileElement lorann;
+	IMobileElement lorann;
 	/**
 	 * The spell
 	 */
-	private IMobileElement spell;
+	IMobileElement spell;
 	/**
 	 * The scoreLevel
 	 */
-	private int scoreLevel;
+	int scoreLevel;
 
 	/**
 	 * The main constructor
@@ -84,7 +84,6 @@ public class Controller implements IController {
 		this.model.loadMap(1); // On charge la première map
 		this.model.setResurrections(11);
 		this.model.setScore(0);
-		this.destroySpell();
 		this.lorann = model.getMap().getHero();
 		this.DeadMonsters = new ArrayList<IMobileElement>();
 		this.scoreLevel = model.getScore();
@@ -207,6 +206,7 @@ public class Controller implements IController {
 			case RETRY:
 				if (this.model.getResurrections() <= 0) {
 					Sounds.GAMEOVER.stop();
+					this.destroySpell();
 					this.init();
 				} else {
 					DeadMonsters.clear();

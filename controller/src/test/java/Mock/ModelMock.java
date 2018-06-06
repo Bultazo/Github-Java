@@ -3,10 +3,14 @@
  */
 package Mock;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Observable;
+
+import javax.imageio.ImageIO;
+
 import contract.ControllerOrder;
 import contract.Permeability;
 import contract.StateElement;
@@ -16,9 +20,8 @@ import model.IMobileElement;
 import model.IModel;
 
 
-
 /**
- * @author DELL & Samir 
+ * @author DELL & Samir
  *
  */
 public class ModelMock extends Observable implements IModel {
@@ -44,29 +47,33 @@ public class ModelMock extends Observable implements IModel {
 	private int resurrections;
 
 	/**
-	 * The main constructor 
+	 * The main constructor
 	 */
 	public ModelMock() {
-		this.map = null;
+
 	}
 
 	/**
 	 * Loads the map
+	 * 
 	 * @param ID
-	 * @throws IOException 
 	 */
-	public void loadMapp(final int ID) throws IOException {
-
-		this.map=new MapMock(20,12);
-        try {
-			map.setHero(new HeroMock(this));
-		} catch (IOException e) {
+	public void loadMap(int ID) {
+		
+		try {
+			HeroMock hero = new HeroMock(this);
+			this.map = new MapMock(20, 12,hero);
+			hero.setX(5);
+			hero.setY(5);
+			this.map.setID(ID);
+			this.score = 0;
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-        map.setHeroPosition(5,5);
-        map.setID(ID);
-        map.getMobiles().add(new MonsterMock("monster_1", this));
+		
+		
+
 	}
 
 	/**
@@ -76,115 +83,89 @@ public class ModelMock extends Observable implements IModel {
 		setChanged();
 		notifyObservers();
 	}
-	
-	
+
 	// Methods
-	
+
 	/*
 	 * Overrides the testType Method in the implemented interface
-	 */ 
+	 */
 	public int testType(IElement element) {
 		if (element instanceof DoorMock) {
 			return 2;
-		} 
+		}
 		return 0;
 	}
-	
 
 	/*
 	 * Overrides the createSpell Method in the implemented interface
-	 */ 
+	 */
 	public void createSpell(String path) throws IOException {
 		IMobileElement spell = new SpellMock(path, this);
 		IMobileElement lorann = map.getHero();
 		map.setSpell(spell);
-
-		
 	}
 
 	/*
 	 * Overrides the getMap Method in the implemented interface
+	 * 
 	 * @return
-	 */ 
-	@Override
-	public IMap getMap() {
-		// TODO Auto-generated method stub
-		return null;
+	 */
+
+	public void setOpenDoor(IElement element) {
+		element.setPermeability(Permeability.PENETRABLE);
+		element.setStateElement(StateElement.DOOR);
+
 	}
 
+	// Getters and setters
+
 	/*
-	 * Overrides the setMessage Method in the implemented interface
-	 * @param message
-	 */ 
-	@Override
-	public void setMessage(String message) {
-		// TODO Auto-generated method stub
-		
+	 * Overrides the getMap Method in the implemented interface
+	 */
+	public IMap getMap() {
+		return this.map;
 	}
 
 	/*
 	 * Overrides the getMessage Method in the implemented interface
-	 * @return
-	 */ 
-	@Override
+	 */
 	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return message;
 	}
 
 	/*
-	 * Overrides the setOpenDoor Method in the implemented interface
-	 * @param element
-	 */ 
-	@Override
-	public void setOpenDoor(IElement element) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/*
-	 * Overrides the setResurrections Method in the implemented interface
-	 * @param resurrections
-	 */ 
-	@Override
-	public void setResurrections(int resurrections) {
-		// TODO Auto-generated method stub
-		
+	 * Overrides the setMessage Method in the implemented interface
+	 */
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	/*
 	 * Overrides the getResurrections Method in the implemented interface
-	 * @return
-	 */ 
-	@Override
+	 */
 	public int getResurrections() {
-		// TODO Auto-generated method stub
-		return 0;
+		return resurrections;
+	}
+
+	/*
+	 * Overrides the setResurrections Method in the implemented interface
+	 */
+	public void setResurrections(int resurrections) {
+		this.resurrections = resurrections;
 	}
 
 	/*
 	 * Overrides the setScore Method in the implemented interface
-	 * @param i
-	 */ 
-	@Override
-	public void setScore(int i) {
-		// TODO Auto-generated method stub
-		
+	 */
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	/*
 	 * Overrides the getScore Method in the implemented interface
-	 * @return
-	 */ 
-	@Override
+	 */
 	public int getScore() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.score;
 	}
 
-	@Override
-	public void loadMap(int ID) {
-		// TODO Auto-generated method stub
-		
-	}
 }

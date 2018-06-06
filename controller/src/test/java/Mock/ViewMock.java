@@ -5,15 +5,11 @@ import controller.IController;
 import view.IView;
 
 
-public class ViewMock {
+public class ViewMock implements IView {
 
+	
     public ViewMock() {
     }
-    /**
-     * 
-     * The test to do setController
-     * @param controller
-     */
 
     public void setController(IController controller) {
 
@@ -23,7 +19,6 @@ public class ViewMock {
 	 * Overrides the getOrder Method in the implemented interface
 	 * @return
 	 */ 
-
 	public ControllerOrder getOrder() {
 		// TODO Auto-generated method stub
 		return null;

@@ -5,39 +5,78 @@ import contract.StateElement;
 import model.IElement;
 import model.ISprite;
 
-/**
- * Created by Romain on 20/06/2016.
- */
+
 public class ElementMock implements IElement {
 
-    ISprite sprite;
-    Permeability permeability;
-    StateElement stateElement;
+	    /**
+	     * The sprite
+	     */
+	    private ISprite sprite;
+	    /**
+	     * The permeability
+	     */
+	    private Permeability permeability;
+	    /**
+	     * The stateElement
+	     */
+	    private StateElement stateElement;
 
-    public ElementMock(Permeability penetrable, StateElement collectable) {
-    }
+	    
+	    /**
+	     * The main constructor 
+	     */
+	    public ElementMock(Permeability permeability,StateElement stateElement) {
+	 
+	        this.permeability = permeability;
+	        this.stateElement = stateElement;
+	    }
 
-    public ISprite getSprite() {
-        return this.sprite;
-    }
+	    // Getters and setters 
+	    
+	    /*
+	     * Overrides the getSprite Method in the implemented interface
+	     */ 
+	    public ISprite getSprite() {
+	        return this.sprite;
+	    }
 
-    public void setSprite(ISprite sprite) {
-        this.sprite=sprite;
-    }
 
-    public Permeability getPermeability() {
-        return this.permeability;
-    }
+	    /*
+	     * Overrides the setSprite Method in the implemented interface
+	     */ 
+	    public synchronized void setSprite(ISprite sprite) {
+	    this.sprite=sprite;
+	    }
 
-    public void setPermeability(Permeability permeability) {
-        this.permeability = permeability;
-    }
 
-    public StateElement getStateElement() {
-        return this.stateElement;
-    }
+	    /*
+	     * Overrides the getPermeability Method in the implemented interface
+	     */ 
+	    public Permeability getPermeability() {
+	        return this.permeability;
+	    }
 
-    public void setStateElement(StateElement stateElement) {
-        this.stateElement = stateElement;
-    }
+
+	    /*
+	     * Overrides the setPermeability Method in the implemented interface
+	     */ 
+	    public void setPermeability(Permeability permeability) {
+	        this.permeability = permeability;
+	    }
+
+
+	    /*
+	     * Overrides the getStateElement Method in the implemented interface
+	     */ 
+	    public StateElement getStateElement() {
+	        return this.stateElement;
+	    }
+
+
+	    /*
+	     * Overrides the setStateElement Method in the implemented interface
+	     */ 
+	    public void setStateElement(StateElement stateElement) {
+	        this.stateElement = stateElement;
+	    }
 }

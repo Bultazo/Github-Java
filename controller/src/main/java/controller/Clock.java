@@ -6,11 +6,6 @@ import java.io.IOException;
  * @author DELL
  *
  */
-
-/**
- * @author DELL
- *
- */
 public class Clock extends Thread implements IClock {
 
 	/**

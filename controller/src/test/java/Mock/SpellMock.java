@@ -10,6 +10,7 @@ import contract.ControllerOrder;
 import contract.Permeability;
 import contract.StateElement;
 import model.IAnimatedSprite;
+import model.IModel;
 
 public class SpellMock extends MobileElementMock implements IAnimatedSprite{
 	/**
@@ -23,8 +24,8 @@ public class SpellMock extends MobileElementMock implements IAnimatedSprite{
 	 * @throws IOException
      * 		Can't read file 
 	 */
-	public SpellMock(String path, ModelMock model) throws IOException {
-		super((new SpriteMock(ImageIO.read(new File("sprite/fireball_1.png")))), Permeability.PENETRABLE,
+	public SpellMock(String path, IModel model) throws IOException {
+		super(Permeability.PENETRABLE,
 				StateElement.SPELL);
 		String Animation[] = { "fireball_1", "fireball_2", "fireball_3", "fireball_4", "fireball_5" };
 

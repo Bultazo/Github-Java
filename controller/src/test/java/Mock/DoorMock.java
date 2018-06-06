@@ -1,15 +1,17 @@
 package Mock;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import contract.Permeability;
 import contract.StateElement;
 
-/**
- * @author Romain
- */
-public class DoorMock extends ElementMock {
 
-    public DoorMock(Permeability penetrable, StateElement collectable) {
-        super(penetrable, collectable);
-    }
+public class DoorMock extends ElementMock {
+	public DoorMock() throws IOException {
+		super(Permeability.BLOCKING,
+				StateElement.DRAGON);
+	}
 }
